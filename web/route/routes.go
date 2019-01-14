@@ -20,4 +20,8 @@ func Configure(b *bootstrap.Bootstrapper) {
 	member := mvc.New(b.Party("/member"))
 	member.Register(userService, b.Sessions.Start)
 	member.Handle(new(controllers.MemberController))
+
+	console := mvc.New(b.Party("/console"))
+	console.Register(userService, b.Sessions.Start)
+	console.Handle(new(controllers.ConsoleController))
 }
