@@ -10,15 +10,15 @@ import (
 )
 
 type UsersService interface {
-	Create(user *entitys.Users) error
-	Login(username, password string) (*entitys.Users, error)
+	Create(user *entitys.User) error
+	Login(username, password string) (*entitys.User, error)
 
-	FindByID(userID uint) (*entitys.Users, error)
-	FindByIDs(ids []uint) []*entitys.Users
+	FindByID(userID uint) (*entitys.User, error)
+	FindByIDs(ids []uint) []*entitys.User
 
-	FindByUsername(username string) (*entitys.Users, error)
+	FindByUsername(username string) (*entitys.User, error)
 
-	UpdateUserInfo(user *entitys.Users, columns []string) (*entitys.Users, error)
+	UpdateUserInfo(user *entitys.User, columns []string) (*entitys.User, error)
 
 	CheckUsernameExist(username string) bool
 	CheckEmailExist(email string) bool
@@ -28,7 +28,7 @@ type userService struct {
 	repo *repository.UserRepo
 }
 
-func (s *userService) Create(user *entitys.Users) error {
+func (s *userService) Create(user *entitys.User) error {
 	if s.CheckEmailExist(user.Username) {
 		return business_errors.UsernameAlreadyExists
 	}
@@ -49,7 +49,7 @@ func (s *userService) Create(user *entitys.Users) error {
 	return s.repo.Create(user)
 }
 
-func (s *userService) Login(username, password string) (*entitys.Users, error) {
+func (s *userService) Login(username, password string) (*entitys.User, error) {
 	user, err := s.repo.FindByUsername(username)
 
 	if err != nil {
@@ -67,20 +67,20 @@ func (s *userService) Login(username, password string) (*entitys.Users, error) {
 	return user, nil
 }
 
-func (s *userService) FindByID(userID uint) (*entitys.Users, error) {
+func (s *userService) FindByID(userID uint) (*entitys.User, error) {
 	user, err := s.repo.FindByID(userID)
 	return user, err
 }
 
-func (s *userService) FindByIDs(ids []uint) []*entitys.Users {
+func (s *userService) FindByIDs(ids []uint) []*entitys.User {
 	return nil
 }
 
-func (s *userService) FindByUsername(username string) (*entitys.Users, error) {
+func (s *userService) FindByUsername(username string) (*entitys.User, error) {
 	return s.repo.FindByUsername(username)
 }
 
-func (s *userService) UpdateUserInfo(user *entitys.Users, columns []string) (*entitys.Users, error) {
+func (s *userService) UpdateUserInfo(user *entitys.User, columns []string) (*entitys.User, error) {
 	return nil, nil
 }
 

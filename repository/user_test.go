@@ -10,7 +10,7 @@ import (
 var userRepo = NewUserRepo(datasource.InstanceGormMaster())
 
 func TestUserRepo_Create(t *testing.T) {
-	user := &entitys.Users{
+	user := &entitys.User{
 		Username: "test",
 		Password: "testPassword",
 		Email:    "test@forum.com",
@@ -25,10 +25,10 @@ func TestUserRepo_Create(t *testing.T) {
 }
 
 func TestUserRepo_FindByID(t *testing.T) {
-	user := &entitys.Users{
-		Username:          "test",
-		Password:          "testPassword",
-		Email:             "test@email.com",
+	user := &entitys.User{
+		Username: "test",
+		Password: "testPassword",
+		Email:    "test@email.com",
 	}
 	err := userRepo.Create(user)
 	if err != nil {
@@ -48,10 +48,10 @@ func TestUserRepo_FindByID(t *testing.T) {
 }
 
 func TestUserRepo_FindByUsername(t *testing.T) {
-	user := &entitys.Users{
-		Username:          "test",
-		Password:          "testPassword",
-		Email:             "test@email.com",
+	user := &entitys.User{
+		Username: "test",
+		Password: "testPassword",
+		Email:    "test@email.com",
 	}
 	err := userRepo.Create(user)
 	if err != nil {
@@ -71,10 +71,10 @@ func TestUserRepo_FindByUsername(t *testing.T) {
 }
 
 func TestUserRepo_FindByEmail(t *testing.T) {
-	user := &entitys.Users{
-		Username:          "test",
-		Password:          "testPassword",
-		Email:             "test@email.com",
+	user := &entitys.User{
+		Username: "test",
+		Password: "testPassword",
+		Email:    "test@email.com",
 	}
 	err := userRepo.Create(user)
 	if err != nil {
@@ -95,10 +95,10 @@ func TestUserRepo_FindByEmail(t *testing.T) {
 }
 
 func TestUserRepo_Update(t *testing.T) {
-	user := entitys.Users{
-		Username:          "test",
-		Password:          "testPassword",
-		Email:             "test@email.com",
+	user := entitys.User{
+		Username: "test",
+		Password: "testPassword",
+		Email:    "test@email.com",
 	}
 	err := userRepo.Create(&user)
 	if err != nil {

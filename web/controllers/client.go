@@ -89,7 +89,7 @@ func (c *ClientController) PostLogin() {
 		return
 	}
 	if user.ID <= 0 {
-		results["success"] = false;
+		results["success"] = false
 		results["message"] = "登录失败"
 		_, _ = c.Ctx.JSON(results)
 	}
@@ -126,7 +126,7 @@ func (c *ClientController) GetSignup() mvc.Result {
 // PostSignup
 func (c *ClientController) PostSignup() {
 	results := make(map[string]interface{})
-	user := entitys.Users{}
+	user := entitys.User{}
 	username := c.Ctx.FormValue("username")
 	password := c.Ctx.FormValue("password")
 	email := c.Ctx.FormValue("email")

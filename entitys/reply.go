@@ -18,7 +18,7 @@ type Reply struct {
 
 	CreatedAt time.Time
 
-	User  Users  `gorm:"foreignkey:user_id"`
+	User  User   `gorm:"foreignkey:user_id"`
 	Topic Topics `gorm:"foreignkey:topic_id"`
 
 	ContentHtml template.HTML `gorm:"-"`

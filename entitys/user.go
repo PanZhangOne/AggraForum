@@ -2,7 +2,7 @@ package entitys
 
 import "time"
 
-type Users struct {
+type User struct {
 	ID       uint   `gorm:"primary_key;AUTO_INCREMENT"`
 	Username string `gorm:"unique;not null;varchar(50)"`
 	Password string `gorm:"not null;varchar(128)"`
@@ -23,7 +23,7 @@ type Users struct {
 	UpdatedAt         time.Time
 }
 
-//func (u *Users) BeforeCreate(err error) {
+//func (u *User) BeforeCreate(err error) {
 //	uid := uuid.NewV4().String()
 //	u.UserID = uid
 //	return

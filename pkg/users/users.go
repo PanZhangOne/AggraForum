@@ -16,7 +16,7 @@ func GetCurrentUserID(sess *sessions.Session) uint {
 }
 
 // 获取当前登录的用户
-func GetCurrentUser(sess *sessions.Session) *entitys.Users {
+func GetCurrentUser(sess *sessions.Session) *entitys.User {
 	user, _ := userService.FindByID(GetCurrentUserID(sess))
 	return user
 }

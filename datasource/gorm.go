@@ -35,7 +35,7 @@ func InstanceGormMaster() *gorm.DB {
 		return nil
 	}
 	masterDB = DB
-	masterDB.AutoMigrate(&entitys.Users{}, &entitys.Labels{}, &entitys.Topics{}, &entitys.Reply{})
+	masterDB.AutoMigrate(&entitys.User{}, &entitys.Labels{}, &entitys.Topics{}, &entitys.Reply{})
 	return DB
 }
 
