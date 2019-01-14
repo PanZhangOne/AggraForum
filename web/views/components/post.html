@@ -1,0 +1,31 @@
+{{define "post"}}
+    <article class="post">
+        <div class="avatar">
+            <a href="/member/{{.User.Username}}">
+                <img src="{{.User.Avatar}}" alt="">
+            </a>
+        </div>
+        <div class="cont">
+            <h2>
+                {{if .Top}}
+                    <span class="badge badge-danger top">置顶</span>
+                {{end}}
+                {{if .Good}}
+                    <span class="badge badge-warning good">精华</span>
+                {{end}}
+                {{if .Lock}}
+                    <span class="badge badge-dark lock">锁定</span>
+                {{end}}
+                <a href="/topic/{{.ID}}" style="vertical-align: middle;">{{.Title}}</a>
+            </h2>
+            <p><a href="/label/{{.Label.ID}}" class="node">{{.Label.LabelName}}</a>  •  <strong><a href="/member/{{.User.Username}}">{{.User.Username}}</a></strong>  •  {{FromStrTime .CreatedAt}}
+                {{if .LastReplyUser.ID}}
+                    •  最后回复来自 <a href="/member/{{.LastReplyUser.Username}}">{{.LastReplyUser.Username}}</a>
+                {{end}}
+                •  <span>{{.ViewsCount}}阅读</span></p>
+        </div>
+        <div class="count">
+            <a href="/topic/{{.ID}}" class="badge badge-primary">{{.RepliesCount}}</a>
+        </div>
+    </article>
+{{end}}

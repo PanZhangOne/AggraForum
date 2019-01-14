@@ -1,0 +1,108 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb" style="background: #fff;">
+        <li class="breadcrumb-item"><a href="/">首页</a></li>
+        <li class="breadcrumb-item"><a id="topic-id" data-id="{{.Topic.ID}}"
+                                       href="/label/{{.Topic.LabelId}}">{{.Topic.Label.LabelName}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">主题正文</li>
+    </ol>
+</nav>
+
+<article class="topic">
+    <section class="topwrap">
+        <div class="userinfo">
+            <div class="avatar">
+                <a href="/member/{{.Topic.User.Username}}" title="{{.Topic.User.Username}}">
+                    <img src="{{.Topic.User.Avatar}}" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="topicinfo">
+            <h2>
+                {{if .Topic.Top}}
+                    <span class="badge badge-danger top">置顶</span>
+                {{end}}
+                {{if .Topic.Good}}
+                    <span class="badge badge-warning good">精华</span>
+                {{end}}
+                {{if .Topic.Lock}}
+                    <span class="badge badge-dark lock">锁定</span>
+                {{end}}
+                {{.Topic.Title}}
+            </h2>
+            <p>
+                <a href="/member/{{.Topic.User.Username}}">{{.Topic.User.Username}}</a>
+                •
+                <time>{{FromStrTime .Topic.CreatedAt}}</time>
+                •
+                <span>浏览量:{{.Topic.ViewsCount}}</span>
+            </p>
+        </div>
+    </section>
+    <article class="article">
+        {{.Content}}
+    </article>
+    <footer class="postinfobot">
+        <div class="likeblock pull-left">
+            <a href="javascript:;" class="up"><i class="far fa-thumbs-up"></i>{{.Topic.Like}}</a>
+            <a href="javascript:;" class="down"><i class="far fa-thumbs-down"></i>{{.Topic.Dislike}}</a>
+            <a href="javascript:;" class="collect"><i class="fa fa-flag"></i>收藏</a>
+        </div>
+    </footer>
+</article>
+
+<section class="replies">
+    <div class="panel-title">
+        <span>回复({{.RepliesLen}})</span>
+    </div>
+    {{range .Replies}}
+        {{template "reply" .}}
+    {{end}}
+</section>
+
+<section class="reply-edit">
+    <div class="panel-title">
+        <span>添加回复</span>
+    </div>
+    {{if .User.ID}}
+        <div class="edit-wrap">
+            <textarea id="editor"></textarea>
+        </div>
+        <div style="background: #fff;padding: 0 15px 15px;">
+            <button id="reply-btn" type="button" class="btn btn-primary">回复</button>
+        </div>
+    {{else}}
+        <div style="background: #fff; padding:6px 15px;">请先<a href="/login">登录</a>或<a href="/signup">注册</a></div>
+    {{end}}
+</section>
+
+<script>
+    $(function () {
+        var editor = new Editor({
+            element: document.getElementById('editor')
+        });
+        var deviceInfo = UTIL.firstUpperCase(detector.os.name) + " " + detector.os.version + "/" +
+            UTIL.firstUpperCase(detector.browser.name) + " " +
+            detector.browser.version;
+
+        $('#reply-btn').on('click', function () {
+            var content = editor.codemirror.getValue();
+            var topicID = $('#topic-id').attr('data-id');
+            if (!content || !content.length) return MESSAGE.error("请输入回帖内容!");
+            $.ajax({
+                type: 'POST',
+                url: '/reply',
+                data: {content: content, topic_id: topicID, device_info: deviceInfo},
+                success: function (data) {
+                    if (data.success) {
+                        MESSAGE.successTitleAndContent('回帖成功')
+                    } else {
+                        MESSAGE.error(data.message);
+                    }
+                },
+                error: function (err) {
+                    MESSAGE.error(err.message);
+                }
+            })
+        })
+    })
+</script>

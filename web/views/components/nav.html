@@ -1,0 +1,30 @@
+{{define "nav"}}
+    {{if .New}}
+        {{template "nav_topic"}}
+    {{end}}
+    <aside class="bd-links" id="bd-docs-nav">
+        <div class="sidebarblock">
+            <h3>热门节点</h3>
+            <div class="divline"></div>
+            <div class="blocktxt">
+                <ul class="cats">
+                    {{range .HotLabels}}
+                    <li><a href="/label/{{.ID}}">{{.LabelName}}</a><div><span class="badge badge-secondary"></span></div></li>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
+
+        <div class="sidebarblock">
+            <h3>今日热门</h3>
+            <div class="divline"></div>
+            <div class="blocktxt">
+                <ul class="cats">
+                    {{range .Hots}}
+                        <li><a href="/topic/{{.ID}}">{{.Title}}</a><div><span class="badge badge-secondary">{{.RepliesCount}}</span></div></li>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
+    </aside>
+{{end}}

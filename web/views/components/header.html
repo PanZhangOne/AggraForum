@@ -1,0 +1,55 @@
+{{define "header"}}
+    <header class="navbar  bd-navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+        <a href="/" title="Aggra Forum" class="navbar-brand mr-0 mr-md-2">
+            {{/*<img src="/public/v2ex@2x.png" alt="logo" style="width: 74px">*/}}
+            Aggra Forum
+        </a>
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav bd-navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/hots">最热</a>
+                </li>
+                {{/*<li class="nav-item">*/}}
+                    {{/*<a class="nav-link " href="/follow">关注</a>*/}}
+                {{/*</li>*/}}
+                <li class="nav-item">
+                    <a class="nav-link " href="/node">节点</a>
+                </li>
+            </ul>
+        </div>
+        {{if .User.ID}}
+            <ul class="nav navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                <li class="nav-item">
+                    <a class="nav-link" href="/new">发帖</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/message">消息</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/setting">设置</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/member">
+                        <img src="{{.User.Avatar}}" alt="" style="width: 20px;border-radius: 50%;">
+                        {{.User.Username}}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">登出</a>
+                </li>
+            </ul>
+        {{else}}
+            <ul class="nav navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">登录</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signup">注册</a>
+                </li>
+            </ul>
+        {{end}}
+    </header>
+{{end}}

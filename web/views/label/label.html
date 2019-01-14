@@ -1,0 +1,15 @@
+<section class="container label-header">
+    <div class="title">
+        {{.Label.LabelName}}
+        <span class="sub">共计{{.Label.TopicsCount}}个主题</span>
+    </div>
+    <div class="desc">
+        {{.Label.LabelDesc}}
+    </div>
+</section>
+
+<section class="post-wrap">
+    {{range .Topics}}
+        {{template "post" .}}
+    {{end}}
+</section>

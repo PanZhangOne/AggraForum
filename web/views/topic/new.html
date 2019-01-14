@@ -1,0 +1,67 @@
+<div>
+    <form class="t-edit" id="new-topic">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">AGGRA</a></li>
+                <li class="breadcrumb-item active" aria-current="page">创作新主题</li>
+            </ol>
+        </nav>
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">主题标题</label>
+            <div class="col-sm-10">
+                <input id="title" type="text" class="form-control" name="title" placeholder="请输入主题标题" autofocus
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">主题正文<span>(*支持Markdown)</span></label>
+            <textarea class="form-control" style="min-height: 300px" name="content"></textarea>
+        </div>
+        <div class="input-group form-group">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">选择节点</label>
+            </div>
+            <select class="custom-select" id="label_id" name="label_id" required>
+                {{range .Labels}}
+                    <option value="{{.ID}}">{{.LabelName}}</option>
+                {{end}}
+            </select>
+        </div>
+        <div class="form-group">
+            <button id="submit" data-url="/new" class="btn btn-primary" type="submit">发布主题</button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    $(function () {
+        var editor = new Editor();
+        editor.render();
+        $('#submit').on('click', function (event) {
+            event.preventDefault();
+
+            var title = $('#title').val();
+            var label = $('#label_id').val();
+            var content = editor.codemirror.getValue();
+            $.ajax({
+                type: 'POST',
+                url: '/new',
+                data: {title: title, label_id: label, content: content},
+                success: function (data) {
+                    if (!data.success) return MESSAGE.error(data.message);
+                    if (data.return_url) {
+                        MESSAGE.successTitleAndContent('发表成功', "发表成功", "/");
+                        setTimeout(function () {
+                            window.location.href = data.return_url || "/login";
+                        }, 3000);
+                    }
+                },
+                error: function (err) {
+                    MESSAGE.error('网络错误');
+                    console.log(err);
+                }
+            });
+        });
+    })
+</script>

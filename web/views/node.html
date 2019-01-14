@@ -1,0 +1,8 @@
+<section class="node">
+    <div class="panel-title">全部节点</div>
+    <div class="node-wrap">
+        {{range .Labels}}
+            <a href="/label/{{.ID}}" class="badge badge-light node-item">{{.LabelName}} <span class="badge badge-pill badge-dark">{{.TopicsCount}}</span></a>
+        {{end}}
+    </div>
+</section>
