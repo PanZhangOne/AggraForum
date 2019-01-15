@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"forum/pkg/users"
 	"forum/services"
 	"forum/util/result"
 	"github.com/kataras/iris"
@@ -16,7 +17,15 @@ type ConsoleController struct {
 }
 
 func (c *ConsoleController) GetHome() mvc.Result {
+	user := users.GetCurrentUser(c.Sessions)
+
+	if user.ID == 0 {
+		c.Ctx.Redirect("/login")
+		return nil
+	}
 	results := make(map[string]interface{})
+
+	results["User"] = user
 	results["Title"] = "后台管理首页"
 	return mvc.View{
 		Layout: "shared/layout_console.html",
@@ -24,3 +33,20 @@ func (c *ConsoleController) GetHome() mvc.Result {
 		Data:   result.Map(results),
 	}
 }
+
+// Users START
+func (c *ConsoleController) GetUsersList() mvc.Result {
+	var (
+		user    = users.GetCurrentUser(c.Sessions)
+		results = make(map[string]interface{})
+	)
+
+	results["User"] = user
+	return mvc.View{
+		Layout: "shared/layout_console.html",
+		Name:   "console/users/list.html",
+		Data:   result.Map(results),
+	}
+}
+
+// Users END
