@@ -10,6 +10,7 @@ import (
 type TopicsService interface {
 	Create(topics *entitys.Topic) error
 
+	// Finds
 	FindByID(topicID uint) (*entitys.Topic, error)
 	FindAll(limit, offset int) ([]entitys.Topic, error)
 	FindAllByLabelID(labelID, limit, offset uint) ([]entitys.Topic, error)
@@ -17,8 +18,15 @@ type TopicsService interface {
 	FindAllNewsTopics() ([]entitys.Topic, error)
 	FindHots(limit int) []entitys.Topic
 
+	// Actions
 	AddTopicOnceViewCount(topic *entitys.Topic)
 	ReplyTopicHandle(topic *entitys.Topic, replyUserID uint)
+
+	AddTopForTopic(topic *entitys.Topic)
+	RemoveTopForTopic(topic *entitys.Topic)
+	MoveTopicToLabel(topic *entitys.Topic, labelID uint)
+	AddLikeCount(topic *entitys.Topic)
+	AddDislikeCount(topic *entitys.Topic)
 }
 
 var (
@@ -82,7 +90,35 @@ func (s *topicsService) ReplyTopicHandle(topic *entitys.Topic, replyUserID uint)
 	_ = s.repo.Update(topic)
 }
 
-func (s *topicsService) TopTopicHandle(topic *entitys.Topic) {}
+// AddTopForTopic 帖子置顶
+func (s *topicsService) AddTopForTopic(topic *entitys.Topic) {
+	topic.Top = true
+	_ = s.repo.Update(topic)
+}
+
+// RemoveTopForTopic 帖子取消置顶
+func (s *topicsService) RemoveTopForTopic(topic *entitys.Topic) {
+	topic.Top = false
+	_ = s.repo.Update(topic)
+}
+
+// MoveTopicToLabel 移动帖子到某个标签
+func (s *topicsService) MoveTopicToLabel(topic *entitys.Topic, labelID uint) {
+	topic.LabelId = labelID
+	_ = s.repo.Update(topic)
+}
+
+// AddLikeCount 增加喜欢
+func (s *topicsService) AddLikeCount(topic *entitys.Topic) {
+	topic.Like += 1
+	_ = s.repo.Update(topic)
+}
+
+// AddDislikeCount 增加不喜欢
+func (s *topicsService) AddDislikeCount(topic *entitys.Topic) {
+	topic.Dislike += 1
+	_ = s.repo.Update(topic)
+}
 
 func NewTopicsService() TopicsService {
 	return &topicsService{
