@@ -49,4 +49,14 @@ func (c *ConsoleController) GetUsersList() mvc.Result {
 	}
 }
 
+func (c *ConsoleController) GetUsersAdmin() mvc.Result {
+	var (
+		user    = users.GetCurrentUser(c.Sessions)
+		results = make(map[string]interface{})
+	)
+
+	results["User"] = user
+	return mvc.View{}
+}
+
 // Users END

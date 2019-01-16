@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type Topics struct {
+type Topic struct {
 	LabelId uint   `gorm:"not null;uint;foreignkey"`
 	UserId  uint   `gorm:"not null;uint;foreignkey"`
 	Title   string `gorm:"not null;varchar(128)"`

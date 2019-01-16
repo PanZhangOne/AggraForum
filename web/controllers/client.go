@@ -45,7 +45,7 @@ func (c *ClientController) Get() mvc.Result {
 	results["User"] = user
 	results["Hots"] = hots
 	results["HotLabels"] = hotLabels
-	results["Topics"] = topics
+	results["Topic"] = topics
 	return mvc.View{
 		Name: "index.html",
 		Data: result.Map(results),
@@ -228,7 +228,7 @@ func (c *ClientController) PostNew() {
 	}
 	_labelID, _ := strconv.Atoi(labelID)
 
-	topic := entitys.Topics{}
+	topic := entitys.Topic{}
 	topic.Title = title
 	topic.UserId = userID
 	topic.LabelId = uint(_labelID)
@@ -262,7 +262,7 @@ func (c *ClientController) GetLabelBy(id uint) mvc.Result {
 	user := users.GetCurrentUser(c.Sessions)
 
 	results["User"] = user
-	results["Topics"] = topics
+	results["Topic"] = topics
 	results["Title"] = label.LabelName
 	results["Label"] = label
 	results["HotLabels"] = hotLabels
@@ -317,7 +317,7 @@ func (c *ClientController) GetHots() mvc.Result {
 
 	results["User"] = user
 	results["HotLabels"] = hotLabels
-	results["Topics"] = topics
+	results["Topic"] = topics
 	results["Hots"] = hots
 	results["Title"] = "社区最热"
 	return mvc.View{

@@ -10,7 +10,7 @@ import (
 var topicRepo = NewTopicsRepo(datasource.InstanceGormMaster())
 
 func TestTopicsRepo_Create(t *testing.T) {
-	var topic = new(entitys.Topics)
+	var topic = new(entitys.Topic)
 	topic.UserId = 7
 	topic.LabelId = 1
 	topic.Title = "test"
