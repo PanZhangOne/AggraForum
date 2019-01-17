@@ -26,7 +26,7 @@ func (c *ConsoleController) GetHome() mvc.Result {
 	results := make(map[string]interface{})
 
 	results["User"] = user
-	results["Title"] = "后台管理首页"
+	results["Title"] = "数据概览"
 	return mvc.View{
 		Layout: "shared/layout_console.html",
 		Name:   "console/home/home.html",

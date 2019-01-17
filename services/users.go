@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"forum/datasource"
 	"forum/entitys"
 	"forum/pkg/business_errors"
@@ -14,14 +13,17 @@ type UsersService interface {
 	Login(username, password string) (*entitys.User, error)
 
 	FindByID(userID uint) (*entitys.User, error)
-	FindByIDs(ids []uint) []*entitys.User
+	FindByIDs(ids []uint) []entitys.User
 
 	FindByUsername(username string) (*entitys.User, error)
-
-	UpdateUserInfo(user *entitys.User, columns []string) (*entitys.User, error)
+	FindAllUsers(limit, offset int) ([]entitys.User, error)
 
 	CheckUsernameExist(username string) bool
 	CheckEmailExist(email string) bool
+
+	// Actions
+	LockUser(user *entitys.User)
+	UnLockUser(user *entitys.User)
 }
 
 type userService struct {
@@ -72,21 +74,21 @@ func (s *userService) FindByID(userID uint) (*entitys.User, error) {
 	return user, err
 }
 
-func (s *userService) FindByIDs(ids []uint) []*entitys.User {
-	return nil
+func (s *userService) FindByIDs(ids []uint) []entitys.User {
+	users, _ := s.repo.FindByIDs(ids)
+	return users
 }
 
 func (s *userService) FindByUsername(username string) (*entitys.User, error) {
 	return s.repo.FindByUsername(username)
 }
 
-func (s *userService) UpdateUserInfo(user *entitys.User, columns []string) (*entitys.User, error) {
-	return nil, nil
+func (s *userService) FindAllUsers(limit, offset int) ([]entitys.User, error) {
+	return s.repo.FindAllUsers(limit, offset)
 }
 
 func (s *userService) CheckUsernameExist(username string) bool {
 	user, err := s.repo.FindByUsername(username)
-	fmt.Println("found user:", user)
 	if err != nil {
 		return false
 	}
@@ -98,7 +100,6 @@ func (s *userService) CheckUsernameExist(username string) bool {
 
 func (s *userService) CheckEmailExist(email string) bool {
 	user, err := s.repo.FindByEmail(email)
-	fmt.Println("found user:", user)
 	if err != nil {
 		return false
 	}
@@ -106,6 +107,16 @@ func (s *userService) CheckEmailExist(email string) bool {
 		return true
 	}
 	return false
+}
+
+func (s *userService) LockUser(user *entitys.User) {
+	user.Lock = true
+	_ = s.repo.Update(user)
+}
+
+func (s *userService) UnLockUser(user *entitys.User) {
+	user.Lock = false
+	_ = s.repo.Update(user)
 }
 
 func NewUserService() UsersService {

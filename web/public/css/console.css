@@ -1,0 +1,57 @@
+.data-wrap {
+    margin: 15px;
+}
+
+.layuiadmin-card-list p.layuiadmin-big-font {
+    font-size: 36px;
+    color: #666;
+    line-height: 36px;
+    padding: 5px 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+}
+.layuiadmin-span-color {
+    font-size: 14px;
+}
+.layuiadmin-badge, .layuiadmin-btn-group, .layuiadmin-span-color {
+    position: absolute;
+    right: 15px;
+}
+.layuiadmin-badge {
+    top: 50%;
+    margin-top: -9px;
+    color: #01AAED;
+}
+.layuiadmin-badge, .layuiadmin-btn-group, .layuiadmin-span-color {
+    position: absolute;
+    right: 15px;
+}
+.laytable-cell-2-0-0 {
+    width: 40px;
+}
+
+.laytable-cell-2-0-1 {
+}
+
+.laytable-cell-2-0-2 {
+}
+
+.laytable-cell-2-0-3 {
+}
+
+.laytable-cell-2-0-4 {
+}
+.laytable-cell-1-0-0 {
+    width: 40px;
+}
+
+.laytable-cell-1-0-1 {
+}
+
+.laytable-cell-1-0-2 {
+}
+
+.laytable-cell-1-0-3 {
+}

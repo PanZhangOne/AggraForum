@@ -4,7 +4,7 @@ import "os"
 
 // FolderIsExist
 // 判断文件夹是否存在
-func FolderIsExist(path string) bool {
+func FolderExist(path string) bool {
 	_, err := os.Stat(path)
 	if err != nil {
 		if os.IsExist(err) {

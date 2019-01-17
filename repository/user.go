@@ -30,6 +30,15 @@ func (r *UserRepo) FindByID(id uint) (*entitys.User, error) {
 	return user, err
 }
 
+func (r *UserRepo) FindByIDs(ids []uint) ([]entitys.User, error) {
+	var users = make([]entitys.User, 0)
+	err := r.db.Where("id in (?)", ids).Find(&users).Error
+	for idx, _ := range users {
+		users[idx].Password = ""
+	}
+	return users, err
+}
+
 func (r *UserRepo) FindByUsername(username string) (*entitys.User, error) {
 	var user = new(entitys.User)
 	result := r.db.Where("username = ?", username).Find(&user)
@@ -48,6 +57,15 @@ func (r *UserRepo) FindByEmail(email string) (*entitys.User, error) {
 		return nil, business_errors.UsernameNotExist
 	}
 	return user, err
+}
+
+func (r *UserRepo) FindAllUsers(limit, offset int) ([]entitys.User, error) {
+	var users = make([]entitys.User, 0)
+	err := r.db.Find(&users).Error
+	for idx, _ := range users {
+		users[idx].Password = ""
+	}
+	return users, err
 }
 
 func (r *UserRepo) Update(users *entitys.User) error {
