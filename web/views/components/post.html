@@ -1,5 +1,5 @@
 {{define "post"}}
-    <article class="post">
+    <article class="cell post">
         <div class="avatar">
             <a href="/member/{{.User.Username}}">
                 <img src="{{.User.Avatar}}" alt="">
@@ -18,14 +18,14 @@
                 {{end}}
                 <a href="/topic/{{.ID}}" style="vertical-align: middle;">{{.Title}}</a>
             </h2>
-            <p><a href="/label/{{.Label.ID}}" class="node">{{.Label.LabelName}}</a>  •  <strong><a href="/member/{{.User.Username}}">{{.User.Username}}</a></strong>  •  {{FromStrTime .CreatedAt}}
+            <p class="topic-info"><a href="/label/{{.Label.ID}}" class="node">{{.Label.LabelName}}</a>  •  <strong><a href="/member/{{.User.Username}}">{{.User.Username}}</a></strong>  •  {{FromStrTime .CreatedAt}}
                 {{if .LastReplyUser.ID}}
                     •  最后回复来自 <a href="/member/{{.LastReplyUser.Username}}">{{.LastReplyUser.Username}}</a>
                 {{end}}
                 •  <span>{{.ViewsCount}}阅读</span></p>
         </div>
         <div class="count">
-            <a href="/topic/{{.ID}}" class="badge badge-primary">{{.RepliesCount}}</a>
+            <a href="/topic/{{.ID}}" class="badge badge-secondary" style="color: #fff">{{.RepliesCount}}</a>
         </div>
     </article>
 {{end}}

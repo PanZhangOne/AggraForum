@@ -7,17 +7,15 @@
     </ol>
 </nav>
 
-<article class="topic">
-    <section class="topwrap">
-        <div class="userinfo">
-            <div class="avatar">
-                <a href="/member/{{.Topic.User.Username}}" title="{{.Topic.User.Username}}">
-                    <img src="{{.Topic.User.Avatar}}" alt="">
-                </a>
-            </div>
+<article class="box topic">
+    <section class="cell topwrap">
+        <div class="avatar">
+            <a href="/member/{{.Topic.User.Username}}" title="{{.Topic.User.Username}}">
+                <img src="{{.Topic.User.Avatar}}" alt="">
+            </a>
         </div>
         <div class="topicinfo">
-            <h2>
+            <h1>
                 {{if .Topic.Top}}
                     <span class="badge badge-danger top">置顶</span>
                 {{end}}
@@ -28,30 +26,29 @@
                     <span class="badge badge-dark lock">锁定</span>
                 {{end}}
                 {{.Topic.Title}}
-            </h2>
-            <p>
+            </h1>
+            <small class="gray">
                 <a href="/member/{{.Topic.User.Username}}">{{.Topic.User.Username}}</a>
                 •
                 <time>{{FromStrTime .Topic.CreatedAt}}</time>
                 •
                 <span>浏览量:{{.Topic.ViewsCount}}</span>
-            </p>
+                •
+                <a href="javascript:;" class="up"><i class="far fa-thumbs-up"></i>{{.Topic.Like}}</a>
+                •
+                <a href="javascript:;" class="down"><i class="far fa-thumbs-down"></i>{{.Topic.Dislike}}</a>
+                •
+                <a href="javascript:;" class="collect"><i class="fa fa-flag"></i>收藏</a>
+            </small>
         </div>
     </section>
-    <article class="article">
+    <article class="cell article">
         {{.Content}}
     </article>
-    <footer class="postinfobot">
-        <div class="likeblock pull-left">
-            <a href="javascript:;" class="up"><i class="far fa-thumbs-up"></i>{{.Topic.Like}}</a>
-            <a href="javascript:;" class="down"><i class="far fa-thumbs-down"></i>{{.Topic.Dislike}}</a>
-            <a href="javascript:;" class="collect"><i class="fa fa-flag"></i>收藏</a>
-        </div>
-    </footer>
 </article>
 
-<section class="replies">
-    <div class="panel-title">
+<section class="box replies">
+    <div class="cell">
         <span>回复({{.RepliesLen}})</span>
     </div>
     {{range .Replies}}
@@ -59,8 +56,8 @@
     {{end}}
 </section>
 
-<section class="reply-edit">
-    <div class="panel-title">
+<section class="box reply-edit">
+    <div class="cell panel-title">
         <span>添加回复</span>
     </div>
     {{if .User.ID}}
@@ -71,7 +68,7 @@
             <button id="reply-btn" type="button" class="btn btn-primary">回复</button>
         </div>
     {{else}}
-        <div style="background: #fff; padding:6px 15px;">请先<a href="/login">登录</a>或<a href="/signup">注册</a></div>
+        <div class="cell">请先<a href="/login">登录</a>或<a href="/signup">注册</a></div>
     {{end}}
 </section>
 

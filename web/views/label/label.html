@@ -1,14 +1,14 @@
-<section class="container label-header">
-    <div class="title">
+<section class="box label-header">
+    <div class="cell" style="font-size: 18px;">
         {{.Label.LabelName}}
-        <span class="sub">共计{{.Label.TopicsCount}}个主题</span>
+        <small>共计{{.Label.TopicsCount}}个主题</small>
     </div>
-    <div class="desc">
+    <div class="cell gray">
         {{.Label.LabelDesc}}
     </div>
 </section>
 
-<section class="post-wrap">
+<section class="box post-wrap">
     {{range .Topics}}
         {{template "post" .}}
     {{end}}
