@@ -11,24 +11,28 @@
                     <a class="user-name" href="/member/">{{.User.Username}}</a>
                     <small class="gray">
                         <span class="time">#{{.Floor}} {{FromStrTime .CreatedAt}} {{.DeviceInfo}}</span>
+                        {{if .ParentReply.Floor}}
+                            回复#{{.ParentReply.Floor}}
+                        {{end}}
                         <span class="btns">
                         {{if .User}}
                             <a href="javascript:;" class="reply-btn" data-reply-id="{{.ID}}" title="回复"><i
                                         class="fas fa-reply"></i></a>
-                            <a href="javascript:;" title="感谢"><i class="fas fa-heart" title="感谢"></i></a>
+                            {{/*<a href="javascript:;" title="感谢"><i class="fas fa-heart" title="感谢"></i></a>*/}}
                         {{end}}
+                        </span>
                     </small>
                 </span>
                 </div>
                 <article>{{.ContentHtml}}</article>
             </div>
         </div>
-        <div class="reply-editor" style="display: none" data-id="{{.ID}}">
+        <div class="reply-editor " style="display: none" data-id="{{.ID}}">
             <div class="info">
                 回复#{{.Floor}} • <a href="/member/{{.User.Username}}">{{.User.Username}}</a>
             </div>
             <div class="editor-content">
-                <textarea id="{{.ID}}"></textarea>
+                <textarea style="width: 100%; min-height: 120px;" id="{{.ID}}"></textarea>
             </div>
             <div style="background: #fff;padding: 0 15px 15px;">
                 <button  type="button" class="btn btn-primary reply-submit" data-reply-id="{{.ID}}">回复</button>

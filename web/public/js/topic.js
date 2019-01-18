@@ -33,16 +33,18 @@
                 reply.addEventListener('click', function (event) {
                     const replyID = this.getAttribute('data-reply-id');
                     const topicID = document.querySelector('#topic-id').getAttribute('data-id');
-                    const content =document.getElementById(replyID).value;
+                    const content = document.getElementById(replyID).value;
+                    const deviceInfo = window.deviceInfo;
                     if (!replyID) return alert('数据出错，请刷新重试!');
                     if (!topicID) return alert('数据出错，请刷新重试!');
 
-                    axios.post('/reply', {
+                    axios.post('/reply', UTIL.stringify({
+                        topic_id: topicID,
                         parent_id: replyID,
+                        device_info: deviceInfo,
                         content
-                    }).then(result => {
+                    })).then(result => {
                         if (result.data.success) {
-                            alert('回复成功');
                             location.reload();
                         } else {
                             alert(result.data.message);
@@ -52,4 +54,6 @@
             })
         }
     };
+
+    topic.events();
 })();

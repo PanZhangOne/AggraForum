@@ -178,7 +178,11 @@ a:active, a:link, a:visited {
 }
 
 .replies .reply-wrap .cont {
+    flex: 1;
     padding-left: 1rem;
+}
+.replies .reply-wrap .btns{
+    float: right;
 }
 
 .reply-edit {

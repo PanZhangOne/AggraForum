@@ -43,7 +43,7 @@ func (r *TopicsRepo) FindAll(limit, offset int) ([]entitys.Topic, error) {
 func (r *TopicsRepo) FindAllByLabelID(labelID, limit, offset uint) ([]entitys.Topic, error) {
 	var topics = make([]entitys.Topic, 0)
 
-	result := r.db.Preload("Label", labelID).Preload("User").Order("last_reply_time desc, created_at desc").Find(&topics)
+	result := r.db.Where("title != ''").Preload("Label", labelID).Preload("User").Order("last_reply_time desc, created_at desc").Find(&topics)
 	err := result.Error
 	return topics, err
 }
@@ -57,7 +57,7 @@ func (r *TopicsRepo) FindAllByUserID(userID, limit, offset uint) ([]entitys.Topi
 
 func (r *TopicsRepo) FindAllNews() ([]entitys.Topic, error) {
 	var topics = make([]entitys.Topic, 0)
-	result := r.db.Debug().Where("title <> ''").Preload("User").Preload("Label").Preload("LastReplyUser").
+	result := r.db.Where("title <> ''").Preload("User").Preload("Label").Preload("LastReplyUser").
 		Order("last_reply_time desc, created_at desc").
 		Find(&topics)
 	err := result.Error
