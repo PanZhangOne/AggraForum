@@ -35,33 +35,22 @@
 
 
 <script>
-    $(function () {
-        var editor = new Editor();
-        editor.render();
-        $('#submit').on('click', function (event) {
-            event.preventDefault();
-
-            var title = $('#title').val();
-            var label = $('#label_id').val();
-            var content = editor.codemirror.getValue();
-            $.ajax({
-                type: 'POST',
-                url: '/new',
-                data: {title: title, label_id: label, content: content},
-                success: function (data) {
-                    if (!data.success) return MESSAGE.error(data.message);
-                    if (data.return_url) {
-                        MESSAGE.successTitleAndContent('发表成功', "发表成功", "/");
-                        setTimeout(function () {
-                            window.location.href = data.return_url || "/login";
-                        }, 3000);
-                    }
-                },
-                error: function (err) {
-                    MESSAGE.error('网络错误');
-                    console.log(err);
-                }
-            });
-        });
+window.onload = function () {
+    const editor = new Editor();
+    editor.render();
+    document.getElementById('submit').addEventListener('click', function (event) {
+        event.preventDefault();
+        const title = document.getElementById('title').value;
+        const label = document.getElementById('label_id').value;
+        const content = editor.codemirror.getValue();
+        axios.post('/new', UTIL.stringify({title, label_id: label, content}))
+            .then(result => {
+                if (!result.data.success) return alert(result.data.message);
+                alert('发表成功!');
+                setTimeout(function () {
+                    window.location.href = result.data.return_url || "/login";
+                }, 3000);
+            }).catch(() => alert('网络错误!'));
     })
+}
 </script>

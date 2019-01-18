@@ -1,76 +1,77 @@
-var COMMON = {
-    init() {
-        var forms = document.getElementsByClassName('needs-validation');
-        var validation = Array.prototype.filter.call(forms, function (form) {
-            form.classList.add('was-validated');
-        });
+const COMMON = (function () {
 
-        window.AJAX = this.AJAX;
-        window.MESSAGE = this.MESSAGE;
-        window.UTIL = this.UTIL;
-    },
-    MESSAGE: {
-        error: function (message) {
-            var template = `<div class="alert alert-danger alert-dismissible fade show" role="alert">${message}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`;
-            $('#message').append(template);
-        },
-        successTitleAndContent: function (title, message, href) {
-            var link;
-            if (href) link = `<a href="${href}" class="alert-link">点击跳转</a>`
-            var template = `<div class="alert alert-success" role="alert">
-                                <h4 class="alert-heading">${title}</h4>
-                                <p>${message} ${link}</p>
-                            </div>`;
-            $('#message').append(template);
+    const AJAX = (function () {
+        function _isRequired(el) {
+            return el.getAttribute('required');
         }
-    },
-    AJAX: {
-        post: function (submitBtn, formEl, successFn, errorFn) {
+
+        function _getKeyAndValue(el) {
+            const key = el.getAttribute('name');
+            const value = el.value;
+            return {key, value};
+        }
+
+        const post = function (submitBtn, formEl, successFn, errorFn) {
             if (!submitBtn || !formEl) return;
-            var url = $(submitBtn).attr('data-url');
-            var data = {};
-            var inputs = $(formEl).find('input');
-            var divContent = $(formEl).find('div[contenteditable]');
-            var select = $(formEl).find('select');
+            const url = submitBtn.getAttribute('data-url');
+            const _form = document.getElementById(formEl);
+            const data = {};
+            const inputs = _form.querySelectorAll('input');
+            const divInputs = _form.querySelectorAll('div[contenteditable]');
+            const selects = _form.querySelectorAll('select');
 
-            for (var i = 0; i < inputs.length; i++) {
-                var isRequired = $(inputs[i]).attr('required');
-                var key = $(inputs[i]).attr('name');
-                var value = $(inputs[i]).val();
-                if (isRequired && !value) return MESSAGE.error('请填写' + key);
+            inputs.forEach(input => {
+                const {key, value} = _getKeyAndValue(input);
                 data[key] = value;
-            }
-
-            if (divContent || divContent.length) {
-                for (var i = 0; i < divContent.length; i++) {
-                    var key = $(divContent[i]).attr('name');
-                    var value = $(divContent[i]).html();
-                    data[key] = value;
-                }
-            }
-
-            if (select || select.length) {
-                for (var i = 0; i < select.length; i++) {
-                    var key = $(select[i]).attr('name');
-                    var value = $(select[i]).val();
-                    data[key] = value;
-                }
-            }
-            $.post({
-                url,
-                data,
-                success: successFn,
-                error: errorFn
             });
-        }
-    },
-    UTIL: {
-        firstUpperCase: function (str) {
+            divInputs.forEach(input => {
+                const {key, value} = _getKeyAndValue(input);
+                data[key] = value;
+            });
+            selects.forEach(input => {
+                const {key, value} = _getKeyAndValue(input);
+                data[key] = value;
+            });
+            axios.post(url, UTIL.stringify(data)).then(successFn).catch(errorFn);
+        };
+
+        return {post}
+    })();
+
+    const UTIL = (function () {
+        function firstUpperCase(str) {
             return str.toLowerCase().replace(/\b[a-z]/g, function (s) {
                 return s.toUpperCase();
             });
         }
-    }
-};
+        function stringify(data) {
+            let res = '';
+            for (const i in data) {
+                res += `${i}=${data[i]}&`
+            }
+            return res;
+        }
+
+        return {firstUpperCase, stringify}
+    })();
+
+    const init = function () {
+        const forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function (form) {
+            form.classList.add('was-validated');
+        });
+
+        window.deviceInfo = UTIL.firstUpperCase(detector.os.name) + " " + detector.os.version + "/" +
+            UTIL.firstUpperCase(detector.browser.name) + " " +
+            detector.browser.version;
+
+        axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+        window.AJAX = AJAX;
+        window.UTIL = UTIL;
+    };
+
+    return {init};
+})();
 
 COMMON.init();

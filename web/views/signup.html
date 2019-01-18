@@ -33,18 +33,33 @@
 </div>
 
 <script>
-    $('#submitBtn').on('click', function (event) {
-        event.preventDefault();
-        // alert(1)
-        AJAX.post(this, '#signup-box', function success(data) {
-            if (!data.success) return MESSAGE.error(data.message);
-            MESSAGE.successTitleAndContent('注册成功', "亲爱的用户，你已经注册成功了", "/login");
-            setTimeout(function () {
-                window.location.href = data.return_url || "/login";
-            }, 3000);
-        }, function error(err) {
-            MESSAGE.error('网络错误');
-            console.error(err);
-        });
-    })
+    window.onload = function () {
+        document.getElementById('submitBtn').addEventListener('click', function (event) {
+            event.preventDefault();
+            AJAX.post(this, 'signup-box', function success(result) {
+                if (!result.data.success) return alert(result.data.message);
+                // MESSAGE.successTitleAndContent('注册成功', "亲爱的用户，你已经注册成功了", "/login");
+                setTimeout(function () {
+                    window.location.href = result.data.return_url || "/login";
+                }, 3000);
+            }, function error(err) {
+                alert('网络错误');
+                console.error(err);
+            })
+        })
+    }
+    // $('#submitBtn').on('click', function (event) {
+    //     event.preventDefault();
+    //     // alert(1)
+    //     AJAX.post(this, '#signup-box', function success(data) {
+    //         if (!data.success) return MESSAGE.error(data.message);
+    //         MESSAGE.successTitleAndContent('注册成功', "亲爱的用户，你已经注册成功了", "/login");
+    //         setTimeout(function () {
+    //             window.location.href = data.return_url || "/login";
+    //         }, 3000);
+    //     }, function error(err) {
+    //         MESSAGE.error('网络错误');
+    //         console.error(err);
+    //     });
+    // })
 </script>
