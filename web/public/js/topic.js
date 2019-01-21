@@ -15,6 +15,7 @@
             const self = this;
             const showReplyBtns = document.querySelectorAll('.reply-btn');
             const replyBtns = document.querySelectorAll('button.reply-submit');
+            const collectBtn = document.querySelector('#collect');
             // 显示回复框
             showReplyBtns.forEach(reply => {
                 reply.addEventListener('click', function (event) {
@@ -51,6 +52,13 @@
                         }
                     }).catch(() => alert('网络错误!'));
                 })
+            });
+
+            // 收藏
+            collectBtn.addEventListener('click', function (event) {
+                const topicID = document.querySelector('#topic-id').getAttribute('data-id');
+
+                alert(topicID);
             })
         }
     };

@@ -24,6 +24,7 @@ type ClientController struct {
 	LabelService   services.LabelsService
 	TopicService   services.TopicsService
 	RepliesService services.RepliesService
+	CollectTopic   services.CollectTopicService
 
 	Sessions *sessions.Session
 }
@@ -392,4 +393,34 @@ func (c *ClientController) GetNode() mvc.Result {
 		Name: "node.html",
 		Data: result.Map(results),
 	}
+}
+
+func (c *ClientController) GetCollectTopicBy(id uint) {
+	var (
+		user    = users.GetCurrentUser(c.Sessions)
+		results = make(map[string]interface{})
+	)
+	results["success"] = false
+	results["message"] = ""
+
+	if user.ID <= 0 {
+		c.Ctx.Redirect("/login")
+		return
+	}
+
+	topic, _ := c.TopicService.FindByID(id)
+	if topic.ID <= 0 {
+		results["message"] = "未找到该主题"
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+
+	err := c.CollectTopic.Collect(user.ID, topic.ID)
+	if err != nil {
+		results["message"] = err.Error()
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+	results["success"] = true
+	results["message"] = "收藏成功"
 }

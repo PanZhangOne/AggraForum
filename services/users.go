@@ -20,6 +20,7 @@ type UsersService interface {
 
 	CheckUsernameExist(username string) bool
 	CheckEmailExist(email string) bool
+	CheckUserIsLockByID(userID uint) bool
 
 	// Actions
 	LockUser(user *entitys.User)
@@ -117,6 +118,11 @@ func (s *userService) LockUser(user *entitys.User) {
 func (s *userService) UnLockUser(user *entitys.User) {
 	user.Lock = false
 	_ = s.repo.Update(user)
+}
+
+func (s *userService) CheckUserIsLockByID(userID uint) bool {
+	user, _ := s.FindByID(userID)
+	return user.Lock
 }
 
 func NewUserService() UsersService {

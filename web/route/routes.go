@@ -8,13 +8,18 @@ import (
 )
 
 func Configure(b *bootstrap.Bootstrapper) {
-	userService := services.NewUserService()
-	labelService := services.NewLabelService()
-	topicService := services.NewTopicsService()
-	repliesService := services.NewRepliesService()
+	var (
+		userService         = services.NewUserService()
+		labelService        = services.NewLabelService()
+		topicService        = services.NewTopicsService()
+		repliesService      = services.NewRepliesService()
+		collectTopicService = services.NewCollectTopicService()
+	)
 
 	client := mvc.New(b.Party("/"))
-	client.Register(userService, labelService, topicService, repliesService, b.Sessions.Start)
+	client.Register(userService, labelService, topicService, repliesService,
+		collectTopicService,
+		b.Sessions.Start)
 	client.Handle(new(controllers.ClientController))
 
 	member := mvc.New(b.Party("/member"))
