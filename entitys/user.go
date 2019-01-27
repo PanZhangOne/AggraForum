@@ -22,9 +22,3 @@ type User struct {
 	CreatedAt         time.Time
 	UpdatedAt         time.Time
 }
-
-//func (u *User) BeforeCreate(err error) {
-//	uid := uuid.NewV4().String()
-//	u.UserID = uid
-//	return
-//}
