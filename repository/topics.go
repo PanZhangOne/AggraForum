@@ -43,7 +43,7 @@ func (r *TopicsRepo) FindAll(limit, offset int) ([]entitys.Topic, error) {
 func (r *TopicsRepo) FindAllByLabelID(labelID, limit, offset uint) ([]entitys.Topic, error) {
 	var topics = make([]entitys.Topic, 0)
 
-	result := r.db.Where("title != ''").Preload("Label", labelID).Preload("User").Order("last_reply_time desc, created_at desc").Find(&topics)
+	result := r.db.Where("title != ''").Preload("Label", labelID).Preload("User").Order("top desc, last_reply_time desc, created_at desc").Find(&topics)
 	err := result.Error
 	return topics, err
 }
