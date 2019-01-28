@@ -17,8 +17,10 @@ type Topic struct {
 	LastReplyUserID uint `gorm:"uint;foreignkey"`
 	LastReplyTime   time.Time
 
-	Like    int `gorm:"default:0"`
-	Dislike int `gorm:"default:0"`
+	Like         bool `gorm:"-"`
+	Dislike      bool `gorm:"-"`
+	LikeCount    int  `gorm:"default:0"`
+	DislikeCount int  `gorm:"default:0"`
 
 	Top  bool `gorm:"boolean;default:0"`
 	Good bool `gorm:"boolean;default:0"`

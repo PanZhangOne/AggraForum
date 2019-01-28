@@ -17,6 +17,10 @@
             const replyBtns = document.querySelectorAll('button.reply-submit');
             const collectBtn = document.querySelector('#collect');
             const cancelCollectionBtn = document.querySelector('#cancel_collection');
+            const likeBtn = document.querySelector('#like');
+            const cancelLikeBtn = document.querySelector('#cancel_like');
+            const cancelDislikeBtn = document.querySelector('#cancel_dislike');
+            const dislikeBtn = document.querySelector('#dislike');
             const topicID = document.querySelector('#topic-id').getAttribute('data-id');
 
             // 显示回复框
@@ -71,7 +75,38 @@
                     alert(result.data.message);
                     if (result.data.success) location.reload();
                 }).catch(err => alert(err.message));
+            });
+
+            // 喜欢
+            likeBtn && likeBtn.addEventListener('click', function (event) {
+                axios.get(`/topic/like/${topicID}`).then(result => {
+                    alert(result.data.message);
+                    if (result.data.success) location.reload();
+                }).catch(err => alert(err.message));
+            });
+            // 取消喜欢
+            cancelLikeBtn && cancelLikeBtn.addEventListener('click', function (event) {
+                axios.get(`/topic/like/cancel/${topicID}`).then(result => {
+                    alert(result.data.message);
+                    if (result.data.success) location.reload();
+                }).catch(err => alert(err.message));
+            });
+
+            // 不喜欢
+            dislikeBtn && dislikeBtn.addEventListener('click', function (event) {
+                axios.get(`/topic/dislike/${topicID}`).then(result => {
+                    alert(result.data.message);
+                    if (result.data.success) location.reload();
+                }).catch(err => alert(err.message));
+            });
+            // 取消不喜欢
+            cancelDislikeBtn && cancelDislikeBtn.addEventListener('click', function (event) {
+                axios.get(`/topic/dislike/cancel/${topicID}`).then(result => {
+                    alert(result.data.message);
+                    if (result.data.success) location.reload();
+                }).catch(err => alert(err.message));
             })
+
         }
     };
 

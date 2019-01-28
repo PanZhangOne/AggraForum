@@ -34,9 +34,17 @@
                 •
                 <span>浏览量:{{.Topic.ViewsCount}}</span>
                 •
-                <a href="javascript:;" class="up"><i class="far fa-thumbs-up"></i>{{.Topic.Like}}</a>
+                {{if .Topic.Like}}
+                    <a id="cancel_like" href="javascript:;" class="up" style="color: #eb7350"><i class="far fa-thumbs-up"></i>{{.Topic.LikeCount}}</a>
+                {{else}}
+                    <a id="like" href="javascript:;" class="up"><i class="far fa-thumbs-up"></i>{{.Topic.LikeCount}}</a>
+                {{end}}
                 •
-                <a href="javascript:;" class="down"><i class="far fa-thumbs-down"></i>{{.Topic.Dislike}}</a>
+                {{if .Topic.Dislike}}
+                    <a id="cancel_dislike" href="javascript:;" class="down" style="color: #eb7350"><i class="far fa-thumbs-down"></i>{{.Topic.DislikeCount}}</a>
+                {{else}}
+                    <a id="dislike" href="javascript:;" class="down"><i class="far fa-thumbs-down"></i>{{.Topic.DislikeCount}}</a>
+                {{end}}
                 •
                 {{if .IsCollect}}
                 <a id="cancel_collection" href="javascript:;" class="collect"><i class="fa fa-flag"></i>取消收藏</a>

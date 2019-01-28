@@ -21,6 +21,8 @@ type TopicsService interface {
 	// Actions
 	AddTopicOnceViewCount(topic *entitys.Topic)
 	ReplyTopicHandle(topic *entitys.Topic, replyUserID uint)
+	ReduceLikeCount(topic *entitys.Topic)
+	ReduceDislikeCount(topic *entitys.Topic)
 
 	AddTopForTopic(topic *entitys.Topic)
 	RemoveTopForTopic(topic *entitys.Topic)
@@ -110,13 +112,23 @@ func (s *topicsService) MoveTopicToLabel(topic *entitys.Topic, labelID uint) {
 
 // AddLikeCount 增加喜欢
 func (s *topicsService) AddLikeCount(topic *entitys.Topic) {
-	topic.Like += 1
+	topic.LikeCount += 1
 	_ = s.repo.Update(topic)
 }
 
 // AddDislikeCount 增加不喜欢
 func (s *topicsService) AddDislikeCount(topic *entitys.Topic) {
-	topic.Dislike += 1
+	topic.DislikeCount += 1
+	_ = s.repo.Update(topic)
+}
+
+func (s *topicsService) ReduceLikeCount(topic *entitys.Topic) {
+	topic.LikeCount -= 1
+	_ = s.repo.Update(topic)
+}
+
+func (s *topicsService) ReduceDislikeCount(topic *entitys.Topic) {
+	topic.DislikeCount -= 1
 	_ = s.repo.Update(topic)
 }
 

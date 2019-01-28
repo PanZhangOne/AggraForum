@@ -25,6 +25,7 @@ type ClientController struct {
 	TopicService        services.TopicsService
 	RepliesService      services.RepliesService
 	CollectTopicService services.CollectTopicService
+	LikeTopicService    services.LikeTopicService
 
 	Sessions *sessions.Session
 }
@@ -276,14 +277,20 @@ func (c *ClientController) GetLabelBy(id uint) mvc.Result {
 
 func (c *ClientController) GetTopicBy(id uint) mvc.Result {
 	var (
-		user      = users.GetCurrentUser(c.Sessions)
-		topic, _  = c.TopicService.FindByID(id)
-		hotLabels = c.LabelService.FindHotLabels()
-		results   = make(map[string]interface{})
-		replies   = c.RepliesService.FindRepliesByTopicID(id)
-		hots      = c.TopicService.FindHots(10)
-		isCollect = c.CollectTopicService.CheckCollectedTopic(user.ID, topic.ID)
+		user             = users.GetCurrentUser(c.Sessions)
+		topic, _         = c.TopicService.FindByID(id)
+		hotLabels        = c.LabelService.FindHotLabels()
+		results          = make(map[string]interface{})
+		replies          = c.RepliesService.FindRepliesByTopicID(id)
+		hots             = c.TopicService.FindHots(10)
+		isCollect        = c.CollectTopicService.CheckCollectedTopic(user.ID, topic.ID)
+		likeOrDislike, _ = c.LikeTopicService.FindTopicIsLikeOrDislike(user.ID, id)
 	)
+
+	if likeOrDislike.ID >= 1 {
+		topic.Like = likeOrDislike.Like
+		topic.Dislike = likeOrDislike.Dislike
+	}
 
 	unsafe := blackfriday.Run([]byte(topic.Content))
 	contentHtml := template.HTML(bluemonday.UGCPolicy().SanitizeBytes(unsafe))
@@ -459,5 +466,104 @@ func (c *ClientController) GetCollectTopicCancelBy(topicID uint) {
 	}
 	results["success"] = true
 	results["message"] = "取消收藏成功"
+	_, _ = c.Ctx.JSON(results)
+}
+
+func (c *ClientController) GetTopicLikeBy(topicID uint) {
+	var (
+		userID  = users.GetCurrentUserID(c.Sessions)
+		results = make(map[string]interface{})
+	)
+
+	results["success"] = false
+	results["message"] = ""
+
+	if userID <= 0 {
+		results["message"] = "请先登录"
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+
+	ok, err := c.LikeTopicService.Like(userID, topicID)
+
+	if err != nil {
+		results["message"] = err.Error()
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+	results["success"] = ok
+	results["message"] = "点赞成功"
+	_, _ = c.Ctx.JSON(results)
+}
+
+func (c *ClientController) GetTopicLikeCancelBy(topicID uint) {
+	var (
+		userID  = users.GetCurrentUserID(c.Sessions)
+		results = make(map[string]interface{})
+	)
+
+	results["success"] = false
+	results["message"] = ""
+
+	if userID <= 0 {
+		results["message"] = "请先登录"
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+
+	ok, err := c.LikeTopicService.CancelLike(userID, topicID)
+	if err != nil {
+		results["message"] = err.Error()
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+	results["success"] = ok
+	results["message"] = "取消点赞成功"
+	_, _ = c.Ctx.JSON(results)
+}
+
+func (c *ClientController) GetTopicDislikeBy(topicID uint) {
+	var (
+		userID  = users.GetCurrentUserID(c.Sessions)
+		results = make(map[string]interface{})
+	)
+
+	if userID <= 0 {
+		results["message"] = "请先登录"
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+
+	ok, err := c.LikeTopicService.Dislike(userID, topicID)
+	if err != nil {
+		results["message"] = err.Error()
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+	results["success"] = ok
+	results["message"] = "不喜欢成功"
+	_, _ = c.Ctx.JSON(results)
+}
+
+func (c *ClientController) GetTopicDislikeCancelBy(topicID uint) {
+	var (
+		userID  = users.GetCurrentUserID(c.Sessions)
+		results = make(map[string]interface{})
+	)
+
+	if userID <= 0 {
+		results["message"] = "请先登录"
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+	ok, err := c.LikeTopicService.CancelDislike(userID, topicID)
+
+	if err != nil {
+		results["message"] = err.Error()
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+	results["success"] = ok
+	results["message"] = "取消不喜欢成功"
 	_, _ = c.Ctx.JSON(results)
 }
