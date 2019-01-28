@@ -1,0 +1,80 @@
+<div class="col-sm-12 col-8 col-md-8 col-lg-8 col-xl-8 bd-content">
+    <div class="box">
+        <div class="cell">个人信息设置</div>
+        <div class="inner">
+            <form>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">个人网站</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">个性签名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">所在地区</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">任职公司</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">任职职位</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="box">
+        <div class="cell">联系方式设置</div>
+        <div class="inner">
+            <form>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">QQ</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">微博</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Github</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-12  col-4 col-md-4 col-lg-4 col-xl-4 bd-sidebar">
+    <div class="box">
+        <div class="cell">个人信息</div>
+        <div class="inner">
+            <div class="avatar-lg" style="margin: 0 auto;">
+                <img src="{{.User.Avatar}}" alt="">
+            </div>
+            <h2 style="text-align: center;font-size: 2rem;" class="cell"><a href="/member/{{.User.Username}}">{{.User.Username}}</a></h2>
+            <div class="cell" style="text-align: center;">
+                <span>主题(23) · 回复(23) · 精华(23)</span>
+            </div>
+        </div>
+    </div>
+</div>

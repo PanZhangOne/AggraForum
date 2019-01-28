@@ -567,3 +567,64 @@ func (c *ClientController) GetTopicDislikeCancelBy(topicID uint) {
 	results["message"] = "取消不喜欢成功"
 	_, _ = c.Ctx.JSON(results)
 }
+
+func (c *ClientController) GetSetting() mvc.Result {
+	var (
+		user    = users.GetCurrentUser(c.Sessions)
+		results = make(map[string]interface{})
+	)
+
+	if user.ID <= 0 {
+		c.Ctx.Redirect("/login")
+		return nil
+	}
+
+	results["User"] = user
+	results["Title"] = "个人设置"
+
+	return mvc.View{
+		Name:   "setting.html",
+		Layout: "shared/layout_member.html",
+		Data:   result.Map(results),
+	}
+}
+
+func (c *ClientController) GetMessage() mvc.Result {
+	var (
+		user    = users.GetCurrentUser(c.Sessions)
+		results = make(map[string]interface{})
+	)
+
+	if user.ID <= 0 {
+		c.Ctx.Redirect("/login")
+		return nil
+	}
+
+	results["User"] = user
+	results["Title"] = "消息中心"
+
+	return mvc.View{
+		Name:   "message.html",
+		Layout: "shared/layout_member.html",
+		Data:   result.Map(results),
+	}
+}
+
+func (c *ClientController) GetAbout() mvc.Result {
+	hots := c.TopicService.FindHots(10)
+	hotLabels := c.LabelService.FindHotLabels()
+	user := users.GetCurrentUser(c.Sessions)
+	topics, _ := c.TopicService.FindAllNewsTopics()
+
+	var results = make(map[string]interface{})
+
+	results["Title"] = "关于本站"
+	results["User"] = user
+	results["Hots"] = hots
+	results["HotLabels"] = hotLabels
+	results["Topics"] = topics
+	return mvc.View{
+		Name: "about.html",
+		Data: result.Map(results),
+	}
+}
