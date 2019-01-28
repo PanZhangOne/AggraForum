@@ -20,11 +20,11 @@ import (
 type ClientController struct {
 	Ctx iris.Context
 
-	UsersService   services.UsersService
-	LabelService   services.LabelsService
-	TopicService   services.TopicsService
-	RepliesService services.RepliesService
-	CollectTopic   services.CollectTopicService
+	UsersService        services.UsersService
+	LabelService        services.LabelsService
+	TopicService        services.TopicsService
+	RepliesService      services.RepliesService
+	CollectTopicService services.CollectTopicService
 
 	Sessions *sessions.Session
 }
@@ -282,6 +282,7 @@ func (c *ClientController) GetTopicBy(id uint) mvc.Result {
 		results   = make(map[string]interface{})
 		replies   = c.RepliesService.FindRepliesByTopicID(id)
 		hots      = c.TopicService.FindHots(10)
+		isCollect = c.CollectTopicService.CheckCollectedTopic(user.ID, topic.ID)
 	)
 
 	unsafe := blackfriday.Run([]byte(topic.Content))
@@ -301,6 +302,8 @@ func (c *ClientController) GetTopicBy(id uint) mvc.Result {
 	results["Hots"] = hots
 	results["RepliesLen"] = len(replies)
 	results["Editor"] = true
+	results["IsCollect"] = isCollect
+
 	return mvc.View{
 		Name: "topic/topic",
 		Data: result.Map(results),
@@ -415,7 +418,7 @@ func (c *ClientController) GetCollectTopicBy(id uint) {
 		return
 	}
 
-	err := c.CollectTopic.Collect(user.ID, topic.ID)
+	err := c.CollectTopicService.Collect(user.ID, topic.ID, topic.LabelId)
 	if err != nil {
 		results["message"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
@@ -423,4 +426,36 @@ func (c *ClientController) GetCollectTopicBy(id uint) {
 	}
 	results["success"] = true
 	results["message"] = "收藏成功"
+	_, _ = c.Ctx.JSON(results)
+}
+
+func (c *ClientController) GetCollectTopicCancelBy(topicID uint) {
+	var (
+		user    = users.GetCurrentUser(c.Sessions)
+		results = make(map[string]interface{})
+	)
+	results["success"] = false
+	results["message"] = ""
+
+	if user.ID <= 0 {
+		c.Ctx.Redirect("/login")
+		return
+	}
+
+	topic, _ := c.TopicService.FindByID(topicID)
+	if topic.ID <= 0 {
+		results["message"] = "未找到该主题"
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+
+	err := c.CollectTopicService.UnCollect(user.ID, topicID)
+	if err != nil {
+		results["message"] = err.Error()
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+	results["success"] = true
+	results["message"] = "取消收藏成功"
+	_, _ = c.Ctx.JSON(results)
 }

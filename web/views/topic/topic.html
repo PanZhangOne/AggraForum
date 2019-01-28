@@ -38,7 +38,11 @@
                 •
                 <a href="javascript:;" class="down"><i class="far fa-thumbs-down"></i>{{.Topic.Dislike}}</a>
                 •
+                {{if .IsCollect}}
+                <a id="cancel_collection" href="javascript:;" class="collect"><i class="fa fa-flag"></i>取消收藏</a>
+                {{else}}
                 <a id="collect" href="javascript:;" class="collect"><i class="fa fa-flag"></i>收藏</a>
+                {{end}}
             </small>
         </div>
     </section>

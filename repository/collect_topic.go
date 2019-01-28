@@ -25,10 +25,17 @@ func (r *CollectTopicRepo) FindByTopicID(id uint) (*entitys.CollectTopic, error)
 	return collectTopic, err
 }
 
-func (r *CollectTopicRepo) Collect(userID, topicID uint) (*entitys.CollectTopic, error) {
+func (r *CollectTopicRepo) FindByUserIDAndTopicID(userID, topicID uint) (*entitys.CollectTopic, error) {
+	var collectTopic = new(entitys.CollectTopic)
+	err := r.db.Where("topic_id = ? and user_id = ?", topicID, userID).First(collectTopic).Error
+	return collectTopic, err
+}
+
+func (r *CollectTopicRepo) Collect(userID, topicID, LabelID uint) (*entitys.CollectTopic, error) {
 	var collectTopic = new(entitys.CollectTopic)
 	collectTopic.UserID = userID
 	collectTopic.TopicID = topicID
+	collectTopic.LabelID = LabelID
 	err := r.db.Create(collectTopic).Error
 	return collectTopic, err
 }

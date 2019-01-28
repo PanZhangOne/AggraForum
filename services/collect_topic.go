@@ -7,19 +7,21 @@ import (
 )
 
 type CollectTopicService interface {
-	Collect(userID, topicID uint) error
+	Collect(userID, topicID, labelID uint) error
 	UnCollect(userID, topicID uint) error
+
+	CheckCollectedTopic(userID, topicID uint) bool
 }
 
 type collectTopicService struct {
 	repo *repository.CollectTopicRepo
 }
 
-func (s *collectTopicService) Collect(userID, topicID uint) error {
-	if s.CheckCollectedTopic(topicID) {
+func (s *collectTopicService) Collect(userID, topicID, labelID uint) error {
+	if s.CheckCollectedTopic(userID, topicID) {
 		return errors.New("该主题已收藏")
 	}
-	_, err := s.repo.Collect(userID, topicID)
+	_, err := s.repo.Collect(userID, topicID, labelID)
 	return err
 }
 
@@ -27,8 +29,8 @@ func (s *collectTopicService) UnCollect(userID, topicID uint) error {
 	return s.repo.UnCollect(userID, topicID)
 }
 
-func (s *collectTopicService) CheckCollectedTopic(topicID uint) bool {
-	c, _ := s.repo.FindByTopicID(topicID)
+func (s *collectTopicService) CheckCollectedTopic(userID, topicID uint) bool {
+	c, _ := s.repo.FindByUserIDAndTopicID(userID, topicID)
 	return c.ID > 0
 }
 
