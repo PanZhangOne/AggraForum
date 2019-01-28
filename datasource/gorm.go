@@ -38,7 +38,7 @@ func InstanceGormMaster() *gorm.DB {
 	DB.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8mb4")
 
 	masterDB = DB
-	masterDB.AutoMigrate(&entitys.User{}, &entitys.Labels{}, &entitys.Topic{}, &entitys.Reply{},
+	masterDB.AutoMigrate(&entitys.User{}, &entitys.Label{}, &entitys.Topic{}, &entitys.Reply{},
 		&entitys.CollectTopic{})
 	return DB
 }

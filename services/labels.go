@@ -7,50 +7,50 @@ import (
 )
 
 type LabelsService interface {
-	Create(label *entitys.Labels) error
+	Create(label *entitys.Label) error
 
-	FindAll(limit, offset uint) ([]entitys.Labels, error)
-	FindByID(id uint) (*entitys.Labels, error)
-	FindByIDs(ids []uint) ([]entitys.Labels, error)
+	FindAll(limit, offset uint) ([]entitys.Label, error)
+	FindByID(id uint) (*entitys.Label, error)
+	FindByIDs(ids []uint) ([]entitys.Label, error)
 
-	FindAllLabel() []entitys.Labels
-	FindHotLabels() []entitys.Labels
+	FindAllLabel() []entitys.Label
+	FindHotLabels() []entitys.Label
 
-	PostTopicHandle(label *entitys.Labels)
+	PostTopicHandle(label *entitys.Label)
 }
 
 type labelService struct {
 	repo *repository.LabelsRepo
 }
 
-func (s *labelService) Create(label *entitys.Labels) error {
+func (s *labelService) Create(label *entitys.Label) error {
 	return s.repo.Create(label)
 }
 
-func (s *labelService) FindAll(limit, offset uint) ([]entitys.Labels, error) {
+func (s *labelService) FindAll(limit, offset uint) ([]entitys.Label, error) {
 	return s.repo.FindAll(limit, offset)
 }
 
-func (s *labelService) FindAllLabel() []entitys.Labels {
+func (s *labelService) FindAllLabel() []entitys.Label {
 	labels, _ := s.repo.FindAllLabels()
 	return labels
 }
 
-func (s *labelService) FindByID(id uint) (*entitys.Labels, error) {
+func (s *labelService) FindByID(id uint) (*entitys.Label, error) {
 	return s.repo.FindByID(id)
 }
 
-func (s *labelService) FindByIDs(ids []uint) ([]entitys.Labels, error) {
+func (s *labelService) FindByIDs(ids []uint) ([]entitys.Label, error) {
 	return s.repo.FindByIDs(ids)
 }
 
-func (s *labelService) FindHotLabels() []entitys.Labels {
+func (s *labelService) FindHotLabels() []entitys.Label {
 	labels, _ := s.repo.FindHotLabels()
 	return labels
 }
 
 // PostTopicHandle
-func (s *labelService) PostTopicHandle(label *entitys.Labels) {
+func (s *labelService) PostTopicHandle(label *entitys.Label) {
 	label.TopicsCount += 1
 	_ = s.repo.Update(label)
 }

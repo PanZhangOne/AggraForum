@@ -2,7 +2,7 @@ package entitys
 
 import "time"
 
-type Labels struct {
+type Label struct {
 	ID            uint   `gorm:"primary_key;AUTO_INCREMENT"`
 	LabelName     string `gorm:"varchar(32);not null;unique"`
 	LabelDesc     string `gorm:"varchar(255);"`

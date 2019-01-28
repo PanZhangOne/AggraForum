@@ -24,8 +24,8 @@ type Topic struct {
 	Good bool `gorm:"boolean;default:0"`
 	Lock bool `gorm:"boolean;default:0"`
 
-	Label         Labels `gorm:"foreignkey:label_id"`
-	User          User   `gorm:"foreignkey:user_id"`
-	LastReplyUser User   `gorm:"foreignkey:last_reply_user_id"`
+	Label         Label `gorm:"foreignkey:label_id"`
+	User          User  `gorm:"foreignkey:user_id"`
+	LastReplyUser User  `gorm:"foreignkey:last_reply_user_id"`
 	gorm.Model
 }
