@@ -407,7 +407,8 @@ func (c *ClientController) GetCollectTopicBy(id uint) {
 	results["message"] = ""
 
 	if user.ID <= 0 {
-		c.Ctx.Redirect("/login")
+		results["message"] = "请先登录"
+		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
@@ -438,7 +439,8 @@ func (c *ClientController) GetCollectTopicCancelBy(topicID uint) {
 	results["message"] = ""
 
 	if user.ID <= 0 {
-		c.Ctx.Redirect("/login")
+		results["message"] = "请先登录"
+		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
