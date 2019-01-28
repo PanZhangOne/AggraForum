@@ -11,14 +11,15 @@ type User struct {
 	Url    string `gorm:"varchar(255)"`
 	Avatar string `gorm:"varchar(255)"`
 
-	Score             int  `gorm:"int;default:0;"`
-	TopicCount        int  `gorm:"int;default:0"`
-	ReplyCount        int  `gorm:"int;default:0"`
-	FollowerCount     int  `gorm:"int;default:0"`
-	FollowingCount    int  `gorm:"int;default:0"`
-	CollectTagCount   int  `gorm:"int;default:0"`
-	CollectTopicCount int  `gorm:"int;default:0"`
-	Lock              bool `gorm:"boolean;default:0"`
+	Score int  `gorm:"int;default:0;"`
+	Lock  bool `gorm:"boolean;default:0"`
+
+	TopicCount        int `gorm:"-"`
+	ReplyCount        int `gorm:"-"`
+	FollowerCount     int `gorm:"-"`
+	FollowingCount    int `gorm:"-"`
+	CollectTagCount   int `gorm:"-"`
+	CollectTopicCount int `gorm:"-"`
 	CreatedAt         time.Time
 	UpdatedAt         time.Time
 }
