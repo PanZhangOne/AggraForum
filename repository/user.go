@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 	"forum/entitys"
-	"forum/pkg/business_errors"
+	"forum/util/business_errors"
 	"github.com/jinzhu/gorm"
 )
 

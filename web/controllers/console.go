@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"forum/pkg/users"
 	"forum/services"
 	"forum/util/result"
+	"forum/util/users"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
 	"github.com/kataras/iris/sessions"

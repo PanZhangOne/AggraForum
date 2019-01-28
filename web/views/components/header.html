@@ -12,9 +12,6 @@
                 <li class="nav-item">
                     <a class="nav-link " href="/hots">最热</a>
                 </li>
-                {{/*<li class="nav-item">*/}}
-                    {{/*<a class="nav-link " href="/follow">关注</a>*/}}
-                {{/*</li>*/}}
                 <li class="nav-item">
                     <a class="nav-link " href="/node">节点</a>
                 </li>
@@ -32,7 +29,7 @@
                     <a class="nav-link" href="/setting">设置</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/member">
+                    <a class="nav-link" href="/member/{{.User.Username}}">
                         <img src="{{.User.Avatar}}" alt="" style="width: 20px;border-radius: 50%;">
                         {{.User.Username}}
                     </a>

@@ -34,6 +34,9 @@ func InstanceGormMaster() *gorm.DB {
 		log.Fatal("DB ERROR.InstanceGormMaster", err)
 		return nil
 	}
+
+	DB.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8mb4")
+
 	masterDB = DB
 	masterDB.AutoMigrate(&entitys.User{}, &entitys.Labels{}, &entitys.Topic{}, &entitys.Reply{},
 		&entitys.CollectTopic{})
@@ -60,6 +63,9 @@ func InstanceGormSlave() *gorm.DB {
 		log.Fatal("DB ERROR.InstanceGormMaster", err)
 		return nil
 	}
+
+	DB.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8mb4")
+
 	slaveDB = DB
 	return DB
 }
