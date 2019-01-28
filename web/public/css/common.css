@@ -78,6 +78,13 @@ a:active, a:link, a:visited {
     border-bottom: 1px solid #e2e2e2;
 }
 
+.box .cell .desc {
+    font-size: 12px;
+    line-height: 200%;
+    color: #ccc;
+    margin-bottom: 0;
+}
+
 .login-main {
     padding: 30px;
     background-color: #fff;
@@ -229,3 +236,4 @@ a:active, a:link, a:visited {
 .member-info .info .detail .line {
     color: #999;
 }
+

@@ -15,6 +15,7 @@ type TopicsService interface {
 	FindAll(limit, offset int) ([]entitys.Topic, error)
 	FindAllByLabelID(labelID, limit, offset uint) ([]entitys.Topic, error)
 	FindAllByUserID(userID, limit, offset uint) ([]entitys.Topic, error)
+	FindAllNewTopicByUserID(userID, limit, offset uint) ([]entitys.Topic, error)
 	FindAllNewsTopics() ([]entitys.Topic, error)
 	FindHots(limit int) []entitys.Topic
 
@@ -65,6 +66,10 @@ func (s *topicsService) FindAllByLabelID(labelID, limit, offset uint) ([]entitys
 
 func (s *topicsService) FindAllByUserID(userID, limit, offset uint) ([]entitys.Topic, error) {
 	return s.repo.FindAllByLabelID(userID, limit, offset)
+}
+
+func (s *topicsService) FindAllNewTopicByUserID(userID, limit, offset uint) ([]entitys.Topic, error) {
+	return s.repo.FindAllByUserIDOrderBy(userID, "created_at desc", limit, offset)
 }
 
 func (s *topicsService) FindAllNewsTopics() ([]entitys.Topic, error) {
@@ -122,11 +127,13 @@ func (s *topicsService) AddDislikeCount(topic *entitys.Topic) {
 	_ = s.repo.Update(topic)
 }
 
+// ReduceLikeCount 减少喜欢次数
 func (s *topicsService) ReduceLikeCount(topic *entitys.Topic) {
 	topic.LikeCount -= 1
 	_ = s.repo.Update(topic)
 }
 
+// ReduceDislikeCount 减少不喜欢次数
 func (s *topicsService) ReduceDislikeCount(topic *entitys.Topic) {
 	topic.DislikeCount -= 1
 	_ = s.repo.Update(topic)

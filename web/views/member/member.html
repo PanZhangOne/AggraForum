@@ -7,7 +7,7 @@
             </div>
             <div class="detail">
                 <h2>{{.UserInfo.Username}}</h2>
-                <div class="line">第{{.UserInfo.ID}}个会员 加入于{{.UserInfo.CreatedAt}}</div>
+                <div class="line">第{{.UserInfo.ID}}个会员 加入于{{FromTimeString .UserInfo.CreatedAt}}</div>
                 <div class="line">积分: {{.UserInfo.Score}}</div>
             </div>
         </div>
@@ -17,7 +17,10 @@
         <div class="cell">最新创建的主题</div>
         <ul class="inner" style="list-style: none;">
             {{range .Topics}}
-                <li class="cell" style="border-bottom: none;"><a href="/label/{{.Label.ID}}" class="node">{{.Label.LabelName}}</a><a href="/topic/{{.ID}}">{{.Title}}</a></li>
+                <li class="cell" style="border-bottom: none;">
+                    <a href="/label/{{.Label.ID}}" class="node">{{.Label.LabelName}}</a><a href="/topic/{{.ID}}">{{.Title}}</a>
+                    <p class="desc">发布于:{{FromTimeString .CreatedAt}}</p>
+                </li>
             {{end}}
         </ul>
     </div>
@@ -27,7 +30,11 @@
         <div class="inner">
             <ul class="inner" style="list-style: none;">
                 {{range .Replies}}
-                    <li class="cell" style="border-bottom: none;"><a href="/topic/{{.Topic.ID}}">{{.Content}}</a></li>
+                    <li class="cell" style="border-bottom: none;">
+                        <a href="/topic/{{.Topic.ID}}">{{.Topic.Title}}</a>
+                        <span class="desc">·{{FromTimeString .CreatedAt}}</span>
+                        <p class="desc">{{.Content}}</p>
+                    </li>
                 {{end}}
             </ul>
         </div>

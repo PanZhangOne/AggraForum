@@ -27,7 +27,7 @@ func (c *MemberController) GetBy(userName string) mvc.Result {
 		results       = make(map[string]interface{})
 	)
 
-	topics, _ := c.TopicService.FindAllByUserID(userInfo.ID, 12, 1)
+	topics, _ := c.TopicService.FindAllNewTopicByUserID(userInfo.ID, 12, 1)
 	replies := c.ReplyService.FindAllRepliesByUserID(userInfo.ID, 12, 1)
 
 	results["User"] = user
