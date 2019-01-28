@@ -13,6 +13,8 @@ type MemberController struct {
 	Ctx iris.Context
 
 	UsersService services.UsersService
+	TopicService services.TopicsService
+	ReplyService services.RepliesService
 	Sessions     *sessions.Session
 }
 
@@ -21,13 +23,18 @@ func (c *MemberController) GetBy(userName string) mvc.Result {
 		userID        = users.GetCurrentUserID(c.Sessions)
 		user          = users.GetCurrentUser(c.Sessions)
 		userInfo, _   = c.UsersService.FindByUsername(userName)
-		results       = make(map[string]interface{})
 		isCurrentUser = userID == userInfo.ID
+		results       = make(map[string]interface{})
 	)
+
+	topics, _ := c.TopicService.FindAllByUserID(userInfo.ID, 12, 1)
+	replies := c.ReplyService.FindAllRepliesByUserID(userInfo.ID, 12, 1)
 
 	results["User"] = user
 	results["IsCurrentUser"] = isCurrentUser
 	results["UserInfo"] = userInfo
+	results["Topics"] = topics
+	results["Replies"] = replies
 	results["Title"] = "会员中心"
 
 	return mvc.View{

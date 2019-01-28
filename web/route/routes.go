@@ -24,7 +24,8 @@ func Configure(b *bootstrap.Bootstrapper) {
 	client.Handle(new(controllers.ClientController))
 
 	member := mvc.New(b.Party("/member"))
-	member.Register(userService, b.Sessions.Start)
+	member.Register(userService, topicService, repliesService,
+		collectTopicService, b.Sessions.Start)
 	member.Handle(new(controllers.MemberController))
 
 	console := mvc.New(b.Party("/console"))

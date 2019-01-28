@@ -17,6 +17,17 @@ a:active, a:link, a:visited {
     vertical-align: middle
 }
 
+.node {
+    background-color: #e5e5e5;
+    color: #999;
+    padding: 2px 4px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    font-size: 12px;
+}
+
 .gray {
     color: gray;
 }
@@ -44,6 +55,7 @@ a:active, a:link, a:visited {
 
 .box {
     width: 100%;
+    margin-bottom: 20px;
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
@@ -187,4 +199,33 @@ a:active, a:link, a:visited {
 
 .reply-edit {
     margin-top: 20px;
+}
+
+/**************************/
+/*********MEMBER************/
+/**************************/
+
+.member-info .info{
+    display: flex;
+}
+
+.member-info .info .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.member-info .info .avatar img {
+    width: 100%;
+    max-height: 100%;
+}
+
+.member-info .info .detail{
+    padding-left: 1rem;
+    flex: 1;
+}
+
+.member-info .info .detail .line {
+    color: #999;
 }

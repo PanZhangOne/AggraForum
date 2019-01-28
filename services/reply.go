@@ -11,6 +11,7 @@ var _topicServices = NewTopicsService()
 type RepliesService interface {
 	Reply(reply *entitys.Reply) error
 	FindRepliesByTopicID(topicID uint) []entitys.Reply
+	FindAllRepliesByUserID(userID, limit, offset uint) []entitys.Reply
 }
 
 type repliesService struct {
@@ -29,6 +30,12 @@ func (s *repliesService) Reply(reply *entitys.Reply) error {
 
 func (s *repliesService) FindRepliesByTopicID(topicID uint) []entitys.Reply {
 	replies, _ := s.repo.FindByTopicID(topicID)
+	return replies
+}
+
+func (s *repliesService) FindAllRepliesByUserID(userID, limit, offset uint) []entitys.Reply {
+	offset--
+	replies, _ := s.repo.FindByUserID(userID, limit, offset)
 	return replies
 }
 

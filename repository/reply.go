@@ -30,6 +30,12 @@ func (r *ReplyRepo) FindByIDs(ids []uint) ([]entitys.Reply, error) {
 	return replies, err
 }
 
+func (r *ReplyRepo) FindByUserID(userID, limit, offset uint) ([]entitys.Reply, error) {
+	var replies = make([]entitys.Reply, 0)
+	err := r.db.Where("user_id = ?", userID).Preload("Topic").Limit(limit).Offset(offset).Find(&replies).Error
+	return replies, err
+}
+
 func (r *ReplyRepo) FindByTopicID(topicID uint) ([]entitys.Reply, error) {
 	var replies = make([]entitys.Reply, 0)
 	result := r.db.Where("topic_id = ?", topicID).Preload("User").Find(&replies)
