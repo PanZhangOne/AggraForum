@@ -35,7 +35,7 @@ func (c *MemberController) GetBy(userName string) mvc.Result {
 	results["UserInfo"] = userInfo
 	results["Topics"] = topics
 	results["Replies"] = replies
-	results["Title"] = "会员中心"
+	results["Title"] = userInfo.Username + " - 会员中心"
 
 	return mvc.View{
 		Name:   "member/member.html",
