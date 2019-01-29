@@ -19,6 +19,15 @@ func (r *CollectTopicRepo) FindByID(id uint) (*entitys.CollectTopic, error) {
 	return collectTopic, err
 }
 
+func (r *CollectTopicRepo) FindByUserID(userID, limit, offset uint) ([]entitys.CollectTopic, error) {
+	var (
+		topicCollects = make([]entitys.CollectTopic, 0)
+		err           = r.db.Where("user_id = ?", userID).Preload("Topic").Limit(limit).Offset(offset).
+				Order("created_at desc").Find(&topicCollects).Error
+	)
+	return topicCollects, err
+}
+
 func (r *CollectTopicRepo) FindByTopicID(id uint) (*entitys.CollectTopic, error) {
 	var collectTopic = new(entitys.CollectTopic)
 	err := r.db.Where("topic_id = ?", id).First(collectTopic).Error

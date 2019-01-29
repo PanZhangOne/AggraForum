@@ -2,11 +2,14 @@ package services
 
 import (
 	"forum/datasource"
+	"forum/entitys"
 	"forum/repository"
 	"github.com/kataras/iris/core/errors"
 )
 
 type CollectTopicService interface {
+	FindByUserID(userID, limit, offset uint) ([]entitys.CollectTopic, error)
+
 	Collect(userID, topicID, labelID uint) error
 	UnCollect(userID, topicID uint) error
 
@@ -15,6 +18,11 @@ type CollectTopicService interface {
 
 type collectTopicService struct {
 	repo *repository.CollectTopicRepo
+}
+
+func (s *collectTopicService) FindByUserID(userID, limit, offset uint) ([]entitys.CollectTopic, error) {
+	offset--
+	return s.repo.FindByUserID(userID, limit, offset)
 }
 
 func (s *collectTopicService) Collect(userID, topicID, labelID uint) error {

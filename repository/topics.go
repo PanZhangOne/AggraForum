@@ -57,7 +57,7 @@ func (r *TopicsRepo) FindAllByUserID(userID, limit, offset uint) ([]entitys.Topi
 
 func (r *TopicsRepo) FindAllByUserIDOrderBy(userID uint, order string, limit, offset uint) ([]entitys.Topic, error) {
 	var topics = make([]entitys.Topic, 0)
-	result := r.db.Preload("Label").Preload("User", userID).Order(order).Find(&topics)
+	result := r.db.Where("user_id = ?", userID).Preload("Label").Preload("User").Order(order).Find(&topics)
 	err := result.Error
 	return topics, err
 }

@@ -12,10 +12,11 @@ import (
 type MemberController struct {
 	Ctx iris.Context
 
-	UsersService services.UsersService
-	TopicService services.TopicsService
-	ReplyService services.RepliesService
-	Sessions     *sessions.Session
+	UsersService        services.UsersService
+	TopicService        services.TopicsService
+	ReplyService        services.RepliesService
+	TopicCollectService services.CollectTopicService
+	Sessions            *sessions.Session
 }
 
 func (c *MemberController) GetBy(userName string) mvc.Result {
@@ -29,11 +30,13 @@ func (c *MemberController) GetBy(userName string) mvc.Result {
 
 	topics, _ := c.TopicService.FindAllNewTopicByUserID(userInfo.ID, 12, 1)
 	replies := c.ReplyService.FindAllRepliesByUserID(userInfo.ID, 12, 1)
+	collectTopics, _ := c.TopicCollectService.FindByUserID(userID, 12, 1)
 
 	results["User"] = user
 	results["IsCurrentUser"] = isCurrentUser
 	results["UserInfo"] = userInfo
 	results["Topics"] = topics
+	results["CollectTopics"] = collectTopics
 	results["Replies"] = replies
 	results["Title"] = userInfo.Username + " - 会员中心"
 
