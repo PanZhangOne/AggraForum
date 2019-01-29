@@ -570,8 +570,9 @@ func (c *ClientController) GetTopicDislikeCancelBy(topicID uint) {
 
 func (c *ClientController) GetSetting() mvc.Result {
 	var (
-		user    = users.GetCurrentUser(c.Sessions)
-		results = make(map[string]interface{})
+		user       = users.GetCurrentUser(c.Sessions)
+		topicCount = c.TopicService.GetTopicCount(user.ID)
+		results    = make(map[string]interface{})
 	)
 
 	if user.ID <= 0 {
@@ -581,6 +582,7 @@ func (c *ClientController) GetSetting() mvc.Result {
 
 	results["User"] = user
 	results["Title"] = "个人设置"
+	results["TopicCounts"] = topicCount
 
 	return mvc.View{
 		Name:   "setting.html",
@@ -591,8 +593,9 @@ func (c *ClientController) GetSetting() mvc.Result {
 
 func (c *ClientController) GetMessage() mvc.Result {
 	var (
-		user    = users.GetCurrentUser(c.Sessions)
-		results = make(map[string]interface{})
+		user       = users.GetCurrentUser(c.Sessions)
+		topicCount = c.TopicService.GetTopicCount(user.ID)
+		results    = make(map[string]interface{})
 	)
 
 	if user.ID <= 0 {
@@ -602,6 +605,7 @@ func (c *ClientController) GetMessage() mvc.Result {
 
 	results["User"] = user
 	results["Title"] = "消息中心"
+	results["TopicCounts"] = topicCount
 
 	return mvc.View{
 		Name:   "message.html",

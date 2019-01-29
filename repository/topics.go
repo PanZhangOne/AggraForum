@@ -79,6 +79,25 @@ func (r *TopicsRepo) FindHots(limit int) ([]entitys.Topic, error) {
 	return topics, err
 }
 
+func (r *TopicsRepo) GetTopicsCount(userID uint) map[string]int {
+	var (
+		result      = make(map[string]int)
+		topicsCount = 0
+		replyCount  = 0
+		topicGoods  = 0
+	)
+
+	r.db.Model(&entitys.Topic{}).Where("user_id = ?", userID).Count(&topicsCount)
+	r.db.Model(&entitys.Reply{}).Where("user_id = ?", userID).Count(&replyCount)
+	r.db.Model(&entitys.Topic{}).Where("user_id = ? and good = ?", userID, true).Count(&topicGoods)
+
+	result["TopicsCount"] = topicsCount
+	result["ReplyCount"] = replyCount
+	result["TopicGoods"] = topicGoods
+
+	return result
+}
+
 func (r *TopicsRepo) Update(topic *entitys.Topic) error {
 	return r.db.Save(topic).Error
 }

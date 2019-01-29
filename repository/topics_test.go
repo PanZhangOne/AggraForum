@@ -64,3 +64,13 @@ func TestTopicsRepo_FindAllByUserID(t *testing.T) {
 	}
 	fmt.Println(res)
 }
+
+func TestTopicsRepo_GetTopicsCount(t *testing.T) {
+	var userID = uint(1)
+	var result = topicRepo.GetTopicsCount(userID)
+	fmt.Println(result)
+	if result["TopicsCount"] == 0 {
+		t.Error("查找失败")
+	}
+	fmt.Println(result)
+}

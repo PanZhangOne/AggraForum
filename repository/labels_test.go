@@ -9,7 +9,7 @@ import (
 var labelsRepo = NewLabelsRepo(datasource.InstanceGormMaster())
 
 func TestLabelsRepo_Create(t *testing.T) {
-	var label = new(entitys.Labels)
+	var label = new(entitys.Label)
 	label.LabelName = "test"
 
 	err := labelsRepo.Create(label)
@@ -21,7 +21,7 @@ func TestLabelsRepo_Create(t *testing.T) {
 }
 
 func TestLabelsRepo_FindByID(t *testing.T) {
-	var label = new(entitys.Labels)
+	var label = new(entitys.Label)
 	label.LabelName = "test"
 
 	err := labelsRepo.Create(label)
@@ -44,9 +44,9 @@ func TestLabelsRepo_FindByID(t *testing.T) {
 
 func TestLabelsRepo_FindByIDs(t *testing.T) {
 	var (
-		label1 = new(entitys.Labels)
-		label2 = new(entitys.Labels)
-		label3 = new(entitys.Labels)
+		label1 = new(entitys.Label)
+		label2 = new(entitys.Label)
+		label3 = new(entitys.Label)
 	)
 
 	label1.LabelName = "test1"
@@ -79,7 +79,7 @@ func TestLabelsRepo_FindByIDs(t *testing.T) {
 }
 
 func TestLabelsRepo_Update(t *testing.T) {
-	label := entitys.Labels{
+	label := entitys.Label{
 		LabelName: "test",
 	}
 	err := labelsRepo.Create(&label)

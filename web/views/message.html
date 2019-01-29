@@ -19,7 +19,11 @@
             </div>
             <h2 style="text-align: center;font-size: 2rem;" class="cell"><a href="/member/{{.User.Username}}">{{.User.Username}}</a></h2>
             <div class="cell" style="text-align: center;">
-                <span>主题(23) · 回复(23) · 精华(23)</span>
+                <span>
+                    主题(<a href="/member/{{.User.Username}}">{{.TopicCounts.TopicsCount}}</a>) ·
+                    回复(<a href="/member/{{.User.Username}}">{{.TopicCounts.ReplyCount}}</a>) ·
+                    精华(<a href="/member/{{.User.Username}}">{{.TopicCounts.TopicGoods}}</a>)
+                </span>
             </div>
         </div>
     </div>

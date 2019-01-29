@@ -19,6 +19,9 @@ type TopicsService interface {
 	FindAllNewsTopics() ([]entitys.Topic, error)
 	FindHots(limit int) []entitys.Topic
 
+	// Get
+	GetTopicCount(userID uint) map[string]int
+
 	// Actions
 	AddTopicOnceViewCount(topic *entitys.Topic)
 	ReplyTopicHandle(topic *entitys.Topic, replyUserID uint)
@@ -79,6 +82,10 @@ func (s *topicsService) FindAllNewsTopics() ([]entitys.Topic, error) {
 func (s *topicsService) FindHots(limit int) []entitys.Topic {
 	t, _ := s.repo.FindHots(limit)
 	return t
+}
+
+func (s *topicsService) GetTopicCount(userID uint) map[string]int {
+	return s.repo.GetTopicsCount(userID)
 }
 
 // AddTopicOnceViewCount

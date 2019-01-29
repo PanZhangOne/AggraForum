@@ -2,13 +2,13 @@
     <div class="cell reply-wrap" data-wrap-id="{{.ID}}">
         <div class="reply">
             <div class="avatar">
-                <a href="/member/">
+                <a href="/member/{{.User.Username}}">
                     <img src="{{.User.Avatar}}" alt="">
                 </a>
             </div>
             <div class="cont">
                 <div class="userinfo">
-                    <a class="user-name" href="/member/">{{.User.Username}}</a>
+                    <a class="user-name" href="/member/{{.User.Username}}">{{.User.Username}}</a>
                     <small class="gray">
                         <span class="time">#{{.Floor}} {{FromStrTime .CreatedAt}} {{.DeviceInfo}}</span>
                         {{if .ParentReply.Floor}}
