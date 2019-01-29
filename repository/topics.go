@@ -81,19 +81,36 @@ func (r *TopicsRepo) FindHots(limit int) ([]entitys.Topic, error) {
 
 func (r *TopicsRepo) GetTopicsCount(userID uint) map[string]int {
 	var (
-		result      = make(map[string]int)
-		topicsCount = 0
-		replyCount  = 0
-		topicGoods  = 0
+		result       = make(map[string]int)
+		topicCh      = make(chan int)
+		replyCountCh = make(chan int)
+		topicGoodsCh = make(chan int)
 	)
 
-	r.db.Model(&entitys.Topic{}).Where("user_id = ?", userID).Count(&topicsCount)
-	r.db.Model(&entitys.Reply{}).Where("user_id = ?", userID).Count(&replyCount)
-	r.db.Model(&entitys.Topic{}).Where("user_id = ? and good = ?", userID, true).Count(&topicGoods)
+	go func(tCh chan int) {
+		var topicsCount = 0
+		r.db.Model(&entitys.Topic{}).Where("user_id = ?", userID).Count(&topicsCount)
+		tCh <- topicsCount
+		defer close(tCh)
+	}(topicCh)
 
-	result["TopicsCount"] = topicsCount
-	result["ReplyCount"] = replyCount
-	result["TopicGoods"] = topicGoods
+	go func(rCh chan int) {
+		var replyCount = 0
+		r.db.Model(&entitys.Reply{}).Where("user_id = ?", userID).Count(&replyCount)
+		rCh <- replyCount
+		defer close(rCh)
+	}(replyCountCh)
+
+	go func(gCh chan int) {
+		var topicGoods = 0
+		r.db.Model(&entitys.Topic{}).Where("user_id = ? and good = ?", userID, true).Count(&topicGoods)
+		gCh <- topicGoods
+		defer close(gCh)
+	}(topicGoodsCh)
+
+	result["TopicsCount"] = <-topicCh
+	result["ReplyCount"] = <-replyCountCh
+	result["TopicGoods"] = <-topicGoodsCh
 
 	return result
 }
