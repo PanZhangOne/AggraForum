@@ -15,11 +15,12 @@ func Configure(b *bootstrap.Bootstrapper) {
 		repliesService      = services.NewRepliesService()
 		likeTopicService    = services.NewLikeTopicService()
 		collectTopicService = services.NewCollectTopicService()
+		messageService      = services.NewMessageService()
 	)
 
 	client := mvc.New(b.Party("/"))
 	client.Register(userService, labelService, topicService, repliesService,
-		collectTopicService, likeTopicService,
+		collectTopicService, likeTopicService, messageService,
 		b.Sessions.Start)
 	client.Handle(new(controllers.ClientController))
 

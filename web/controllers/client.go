@@ -26,6 +26,7 @@ type ClientController struct {
 	RepliesService      services.RepliesService
 	CollectTopicService services.CollectTopicService
 	LikeTopicService    services.LikeTopicService
+	MessageService      services.MessageService
 
 	Sessions *sessions.Session
 }
@@ -86,19 +87,19 @@ func (c *ClientController) PostLogin() {
 
 	if err != nil {
 		results["success"] = false
-		results["message"] = err.Error()
+		results["message_status"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	if user.ID <= 0 {
 		results["success"] = false
-		results["message"] = "登录失败"
+		results["message_status"] = "登录失败"
 		_, _ = c.Ctx.JSON(results)
 	}
 
 	c.Sessions.Set(conf.SystemConfig.UserIDKey, int(user.ID))
 	results["success"] = true
-	results["message"] = "登录成功"
+	results["message_status"] = "登录成功"
 	results["return_url"] = "/"
 	_, _ = c.Ctx.JSON(results)
 }
@@ -151,7 +152,7 @@ func (c *ClientController) PostSignup() {
 
 	if !status {
 		results["success"] = status
-		results["message"] = message
+		results["message_status"] = message
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
@@ -168,13 +169,13 @@ func (c *ClientController) PostSignup() {
 		status = false
 		message = err.Error()
 		results["success"] = status
-		results["message"] = message
+		results["message_status"] = message
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	results["success"] = status
-	results["message"] = "注册成功"
+	results["message_status"] = "注册成功"
 	results["return_url"] = "/login"
 	_, _ = c.Ctx.JSON(results)
 	return
@@ -224,7 +225,7 @@ func (c *ClientController) PostNew() {
 
 	if len(title) <= 0 {
 		results["success"] = false
-		results["message"] = "主题标题不能为空"
+		results["message_status"] = "主题标题不能为空"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
@@ -239,14 +240,14 @@ func (c *ClientController) PostNew() {
 
 	if err != nil {
 		results["success"] = false
-		results["message"] = err.Error()
+		results["message_status"] = err.Error()
 		fmt.Println(err)
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	results["success"] = true
-	results["message"] = "发表成功"
+	results["message_status"] = "发表成功"
 	results["return_url"] = "/label/" + labelID
 	_, _ = c.Ctx.JSON(results)
 	return
@@ -351,7 +352,7 @@ func (c *ClientController) PostReply() {
 		results    = make(map[string]interface{})
 	)
 	results["success"] = false
-	results["message"] = ""
+	results["message_status"] = ""
 
 	var reply = new(entitys.Reply)
 	_topicID, err := strconv.Atoi(topicID)
@@ -364,7 +365,7 @@ func (c *ClientController) PostReply() {
 	}
 	user, err := c.UsersService.FindByID(userID)
 	if err != nil {
-		results["message"] = err.Error()
+		results["message_status"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
@@ -376,7 +377,7 @@ func (c *ClientController) PostReply() {
 
 	err = c.RepliesService.Reply(reply)
 	if err != nil {
-		results["message"] = err.Error()
+		results["message_status"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
@@ -411,29 +412,29 @@ func (c *ClientController) GetCollectTopicBy(id uint) {
 		results = make(map[string]interface{})
 	)
 	results["success"] = false
-	results["message"] = ""
+	results["message_status"] = ""
 
 	if user.ID <= 0 {
-		results["message"] = "请先登录"
+		results["message_status"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	topic, _ := c.TopicService.FindByID(id)
 	if topic.ID <= 0 {
-		results["message"] = "未找到该主题"
+		results["message_status"] = "未找到该主题"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	err := c.CollectTopicService.Collect(user.ID, topic.ID, topic.LabelId)
 	if err != nil {
-		results["message"] = err.Error()
+		results["message_status"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = true
-	results["message"] = "收藏成功"
+	results["message_status"] = "收藏成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -443,29 +444,29 @@ func (c *ClientController) GetCollectTopicCancelBy(topicID uint) {
 		results = make(map[string]interface{})
 	)
 	results["success"] = false
-	results["message"] = ""
+	results["message_status"] = ""
 
 	if user.ID <= 0 {
-		results["message"] = "请先登录"
+		results["message_status"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	topic, _ := c.TopicService.FindByID(topicID)
 	if topic.ID <= 0 {
-		results["message"] = "未找到该主题"
+		results["message_status"] = "未找到该主题"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	err := c.CollectTopicService.UnCollect(user.ID, topicID)
 	if err != nil {
-		results["message"] = err.Error()
+		results["message_status"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = true
-	results["message"] = "取消收藏成功"
+	results["message_status"] = "取消收藏成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -476,10 +477,10 @@ func (c *ClientController) GetTopicLikeBy(topicID uint) {
 	)
 
 	results["success"] = false
-	results["message"] = ""
+	results["message_status"] = ""
 
 	if userID <= 0 {
-		results["message"] = "请先登录"
+		results["message_status"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
@@ -487,12 +488,12 @@ func (c *ClientController) GetTopicLikeBy(topicID uint) {
 	ok, err := c.LikeTopicService.Like(userID, topicID)
 
 	if err != nil {
-		results["message"] = err.Error()
+		results["message_status"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = ok
-	results["message"] = "点赞成功"
+	results["message_status"] = "点赞成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -503,22 +504,22 @@ func (c *ClientController) GetTopicLikeCancelBy(topicID uint) {
 	)
 
 	results["success"] = false
-	results["message"] = ""
+	results["message_status"] = ""
 
 	if userID <= 0 {
-		results["message"] = "请先登录"
+		results["message_status"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	ok, err := c.LikeTopicService.CancelLike(userID, topicID)
 	if err != nil {
-		results["message"] = err.Error()
+		results["message_status"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = ok
-	results["message"] = "取消点赞成功"
+	results["message_status"] = "取消点赞成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -529,19 +530,19 @@ func (c *ClientController) GetTopicDislikeBy(topicID uint) {
 	)
 
 	if userID <= 0 {
-		results["message"] = "请先登录"
+		results["message_status"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	ok, err := c.LikeTopicService.Dislike(userID, topicID)
 	if err != nil {
-		results["message"] = err.Error()
+		results["message_status"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = ok
-	results["message"] = "不喜欢成功"
+	results["message_status"] = "不喜欢成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -552,19 +553,19 @@ func (c *ClientController) GetTopicDislikeCancelBy(topicID uint) {
 	)
 
 	if userID <= 0 {
-		results["message"] = "请先登录"
+		results["message_status"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	ok, err := c.LikeTopicService.CancelDislike(userID, topicID)
 
 	if err != nil {
-		results["message"] = err.Error()
+		results["message_status"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = ok
-	results["message"] = "取消不喜欢成功"
+	results["message_status"] = "取消不喜欢成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -593,9 +594,11 @@ func (c *ClientController) GetSetting() mvc.Result {
 
 func (c *ClientController) GetMessage() mvc.Result {
 	var (
-		user       = users.GetCurrentUser(c.Sessions)
-		topicCount = c.TopicService.GetTopicCount(user.ID)
-		results    = make(map[string]interface{})
+		user              = users.GetCurrentUser(c.Sessions)
+		topicCount        = c.TopicService.GetTopicCount(user.ID)
+		results           = make(map[string]interface{})
+		messages, _       = c.MessageService.GetAllMessagesByUser(user.ID, 12, 1)
+		unreadMessages, _ = c.MessageService.GetAllNotReadMessages(user.ID, 12, 1)
 	)
 
 	if user.ID <= 0 {
@@ -606,6 +609,8 @@ func (c *ClientController) GetMessage() mvc.Result {
 	results["User"] = user
 	results["Title"] = "消息中心"
 	results["TopicCounts"] = topicCount
+	results["Messages"] = messages
+	results["UnReadMessages"] = unreadMessages
 
 	return mvc.View{
 		Name:   "message.html",

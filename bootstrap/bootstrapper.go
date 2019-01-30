@@ -70,7 +70,7 @@ func (b *Bootstrapper) SetupSessions(expires time.Duration, cookieHashKey, cooki
 // `(context.StatusCodeNotSuccessful`,  which defaults to < 200 || >= 400 but you can change it).
 func (b *Bootstrapper) SetupErrorHandlers() {
 	b.OnAnyErrorCode(func(ctx iris.Context) {
-		errorMsg := ctx.Values().GetString("message")
+		errorMsg := ctx.Values().GetString("message_status")
 		errorCode := ctx.GetStatusCode()
 		if len(errorMsg) == 0 {
 			if errorCode == 404 {
@@ -78,9 +78,9 @@ func (b *Bootstrapper) SetupErrorHandlers() {
 			}
 		}
 		err := iris.Map{
-			"app":     b.AppName,
-			"status":  errorCode,
-			"message": errorMsg,
+			"app":            b.AppName,
+			"status":         errorCode,
+			"message_status": errorMsg,
 		}
 
 		if jsonOutput := ctx.URLParamExists("json"); jsonOutput {
