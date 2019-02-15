@@ -412,7 +412,7 @@ func (c *ClientController) GetCollectTopicBy(id uint) {
 		results = make(map[string]interface{})
 	)
 	results["success"] = false
-	results["message_status"] = ""
+	results["message"] = ""
 
 	if user.ID <= 0 {
 		results["message_status"] = "请先登录"
@@ -422,19 +422,19 @@ func (c *ClientController) GetCollectTopicBy(id uint) {
 
 	topic, _ := c.TopicService.FindByID(id)
 	if topic.ID <= 0 {
-		results["message_status"] = "未找到该主题"
+		results["message"] = "未找到该主题"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	err := c.CollectTopicService.Collect(user.ID, topic.ID, topic.LabelId)
 	if err != nil {
-		results["message_status"] = err.Error()
+		results["message"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = true
-	results["message_status"] = "收藏成功"
+	results["message"] = "收藏成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -444,29 +444,29 @@ func (c *ClientController) GetCollectTopicCancelBy(topicID uint) {
 		results = make(map[string]interface{})
 	)
 	results["success"] = false
-	results["message_status"] = ""
+	results["message"] = ""
 
 	if user.ID <= 0 {
-		results["message_status"] = "请先登录"
+		results["message"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	topic, _ := c.TopicService.FindByID(topicID)
 	if topic.ID <= 0 {
-		results["message_status"] = "未找到该主题"
+		results["message"] = "未找到该主题"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	err := c.CollectTopicService.UnCollect(user.ID, topicID)
 	if err != nil {
-		results["message_status"] = err.Error()
+		results["message"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = true
-	results["message_status"] = "取消收藏成功"
+	results["message"] = "取消收藏成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -477,10 +477,10 @@ func (c *ClientController) GetTopicLikeBy(topicID uint) {
 	)
 
 	results["success"] = false
-	results["message_status"] = ""
+	results["message"] = ""
 
 	if userID <= 0 {
-		results["message_status"] = "请先登录"
+		results["message"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
@@ -488,12 +488,12 @@ func (c *ClientController) GetTopicLikeBy(topicID uint) {
 	ok, err := c.LikeTopicService.Like(userID, topicID)
 
 	if err != nil {
-		results["message_status"] = err.Error()
+		results["message"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = ok
-	results["message_status"] = "点赞成功"
+	results["message"] = "点赞成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -504,22 +504,22 @@ func (c *ClientController) GetTopicLikeCancelBy(topicID uint) {
 	)
 
 	results["success"] = false
-	results["message_status"] = ""
+	results["message"] = ""
 
 	if userID <= 0 {
-		results["message_status"] = "请先登录"
+		results["message"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	ok, err := c.LikeTopicService.CancelLike(userID, topicID)
 	if err != nil {
-		results["message_status"] = err.Error()
+		results["message"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = ok
-	results["message_status"] = "取消点赞成功"
+	results["message"] = "取消点赞成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -530,19 +530,19 @@ func (c *ClientController) GetTopicDislikeBy(topicID uint) {
 	)
 
 	if userID <= 0 {
-		results["message_status"] = "请先登录"
+		results["message"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 
 	ok, err := c.LikeTopicService.Dislike(userID, topicID)
 	if err != nil {
-		results["message_status"] = err.Error()
+		results["message"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = ok
-	results["message_status"] = "不喜欢成功"
+	results["message"] = "不喜欢成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
@@ -553,19 +553,19 @@ func (c *ClientController) GetTopicDislikeCancelBy(topicID uint) {
 	)
 
 	if userID <= 0 {
-		results["message_status"] = "请先登录"
+		results["message"] = "请先登录"
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	ok, err := c.LikeTopicService.CancelDislike(userID, topicID)
 
 	if err != nil {
-		results["message_status"] = err.Error()
+		results["message"] = err.Error()
 		_, _ = c.Ctx.JSON(results)
 		return
 	}
 	results["success"] = ok
-	results["message_status"] = "取消不喜欢成功"
+	results["message"] = "取消不喜欢成功"
 	_, _ = c.Ctx.JSON(results)
 }
 
