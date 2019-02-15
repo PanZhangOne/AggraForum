@@ -67,684 +67,137 @@
 </div>
 <!-- 数据概览 END -->
 
-<div class="layui-card data-wrap">
-    <div class="layui-tab layui-tab-brief layadmin-latestData">
-        <ul class="layui-tab-title">
-            <li class="layui-this">今日热搜</li>
-            <li class="">今日热帖</li>
-        </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
-                <table id="LAY-index-topSearch"></table>
-                <div class="layui-form layui-border-box layui-table-view" lay-filter="LAY-table-1"
-                     lay-id="LAY-index-topSearch" style=" ">
-                    <div class="layui-table-box">
-                        <div class="layui-table-header">
-                            <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
-                                <thead>
-                                <tr>
-                                    <th data-field="0" data-key="1-0-0" data-unresize="true"
-                                        class=" layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">
-                                            <span></span></div>
-                                    </th>
-                                    <th data-field="keywords" data-key="1-0-1" data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><span>关键词</span></div>
-                                    </th>
-                                    <th data-field="frequency" data-key="1-0-2" data-minwidth="120"
-                                        class=" layui-unselect">
-                                        <div class="layui-table-cell laytable-cell-1-0-2"><span>搜索次数</span><span
-                                                    class="layui-table-sort layui-inline"><i
-                                                        class="layui-edge layui-table-sort-asc" title="升序"></i><i
-                                                        class="layui-edge layui-table-sort-desc" title="降序"></i></span>
-                                        </div>
-                                    </th>
-                                    <th data-field="userNums" data-key="1-0-3" class=" layui-unselect">
-                                        <div class="layui-table-cell laytable-cell-1-0-3"><span>用户数</span><span
-                                                    class="layui-table-sort layui-inline"><i
-                                                        class="layui-edge layui-table-sort-asc" title="升序"></i><i
-                                                        class="layui-edge layui-table-sort-desc" title="降序"></i></span>
-                                        </div>
-                                    </th>
-                                </tr>
-                                </thead>
-                            </table>
-                        </div>
-                        <div class="layui-table-body layui-table-main">
-                            <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
-                                <tbody>
-                                <tr data-index="0" class="">
-                                    <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">1</div>
-                                    </td>
-                                    <td data-field="keywords" data-key="1-0-1" data-content="贤心是男是女" data-minwidth="300"
-                                        class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><a
-                                                    href="https://www.baidu.com/s?wd=贤心是男是女" target="_blank"
-                                                    class="layui-table-link">贤心是男是女</a></div>
-                                    </td>
-                                    <td data-field="frequency" data-key="1-0-2" data-minwidth="120" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-2">8520</div>
-                                    </td>
-                                    <td data-field="userNums" data-key="1-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-3">2216</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="1" class="">
-                                    <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">2</div>
-                                    </td>
-                                    <td data-field="keywords" data-key="1-0-1" data-content="Java程序员能找到女朋友吗"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><a
-                                                    href="https://www.baidu.com/s?wd=Java程序员能找到女朋友吗" target="_blank"
-                                                    class="layui-table-link">Java程序员能找到女朋友吗</a></div>
-                                    </td>
-                                    <td data-field="frequency" data-key="1-0-2" data-minwidth="120" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-2">666</div>
-                                    </td>
-                                    <td data-field="userNums" data-key="1-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-3">333</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="2" class="">
-                                    <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">3</div>
-                                    </td>
-                                    <td data-field="keywords" data-key="1-0-1" data-content="此表格是静态模拟数据"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><a
-                                                    href="https://www.baidu.com/s?wd=此表格是静态模拟数据" target="_blank"
-                                                    class="layui-table-link">此表格是静态模拟数据</a></div>
-                                    </td>
-                                    <td data-field="frequency" data-key="1-0-2" data-minwidth="120" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-2">666</div>
-                                    </td>
-                                    <td data-field="userNums" data-key="1-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-3">333</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="3" class="">
-                                    <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">4</div>
-                                    </td>
-                                    <td data-field="keywords" data-key="1-0-1" data-content="layui官方教程"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><a
-                                                    href="https://www.baidu.com/s?wd=layui官方教程" target="_blank"
-                                                    class="layui-table-link">layui官方教程</a></div>
-                                    </td>
-                                    <td data-field="frequency" data-key="1-0-2" data-minwidth="120" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-2">666</div>
-                                    </td>
-                                    <td data-field="userNums" data-key="1-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-3">333</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="4" class="">
-                                    <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">5</div>
-                                    </td>
-                                    <td data-field="keywords" data-key="1-0-1" data-content="layui官方教程"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><a
-                                                    href="https://www.baidu.com/s?wd=layui官方教程" target="_blank"
-                                                    class="layui-table-link">layui官方教程</a></div>
-                                    </td>
-                                    <td data-field="frequency" data-key="1-0-2" data-minwidth="120" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-2">666</div>
-                                    </td>
-                                    <td data-field="userNums" data-key="1-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-3">333</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="5" class="">
-                                    <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">6</div>
-                                    </td>
-                                    <td data-field="keywords" data-key="1-0-1" data-content="layui官方教程"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><a
-                                                    href="https://www.baidu.com/s?wd=layui官方教程" target="_blank"
-                                                    class="layui-table-link">layui官方教程</a></div>
-                                    </td>
-                                    <td data-field="frequency" data-key="1-0-2" data-minwidth="120" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-2">666</div>
-                                    </td>
-                                    <td data-field="userNums" data-key="1-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-3">333</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="6">
-                                    <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">7</div>
-                                    </td>
-                                    <td data-field="keywords" data-key="1-0-1" data-content="layui官方教程"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><a
-                                                    href="https://www.baidu.com/s?wd=layui官方教程" target="_blank"
-                                                    class="layui-table-link">layui官方教程</a></div>
-                                    </td>
-                                    <td data-field="frequency" data-key="1-0-2" data-minwidth="120" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-2">666</div>
-                                    </td>
-                                    <td data-field="userNums" data-key="1-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-3">333</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="7">
-                                    <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">8</div>
-                                    </td>
-                                    <td data-field="keywords" data-key="1-0-1" data-content="layui官方教程"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><a
-                                                    href="https://www.baidu.com/s?wd=layui官方教程" target="_blank"
-                                                    class="layui-table-link">layui官方教程</a></div>
-                                    </td>
-                                    <td data-field="frequency" data-key="1-0-2" data-minwidth="120" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-2">666</div>
-                                    </td>
-                                    <td data-field="userNums" data-key="1-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-3">333</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="8">
-                                    <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">9</div>
-                                    </td>
-                                    <td data-field="keywords" data-key="1-0-1" data-content="layui官方教程"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><a
-                                                    href="https://www.baidu.com/s?wd=layui官方教程" target="_blank"
-                                                    class="layui-table-link">layui官方教程</a></div>
-                                    </td>
-                                    <td data-field="frequency" data-key="1-0-2" data-minwidth="120" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-2">666</div>
-                                    </td>
-                                    <td data-field="userNums" data-key="1-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-3">333</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="9">
-                                    <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">10</div>
-                                    </td>
-                                    <td data-field="keywords" data-key="1-0-1" data-content="layui官方教程"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-1"><a
-                                                    href="https://www.baidu.com/s?wd=layui官方教程" target="_blank"
-                                                    class="layui-table-link">layui官方教程</a></div>
-                                    </td>
-                                    <td data-field="frequency" data-key="1-0-2" data-minwidth="120" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-2">666</div>
-                                    </td>
-                                    <td data-field="userNums" data-key="1-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-1-0-3">333</div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="layui-table-fixed layui-table-fixed-l">
-                            <div class="layui-table-header">
-                                <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
-                                    <thead>
-                                    <tr>
-                                        <th data-field="0" data-key="1-0-0" data-unresize="true"
-                                            class=" layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">
-                                                <span></span></div>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div class="layui-table-body" style="height: 384px;">
-                                <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
-                                    <tbody>
-                                    <tr data-index="0" class="">
-                                        <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">1
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="1" class="">
-                                        <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">2
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="2" class="">
-                                        <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">3
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="3" class="">
-                                        <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">4
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="4" class="">
-                                        <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">5
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="5" class="">
-                                        <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">6
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="6">
-                                        <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">7
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="7">
-                                        <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">8
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="8">
-                                        <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">9
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="9">
-                                        <td data-field="0" data-key="1-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-1-0-0 laytable-cell-numbers">10
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-table-page">
-                        <div id="layui-table-page1">
-                            <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1"><a
-                                        href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0"><i
-                                            class="layui-icon"></i></a><span class="layui-laypage-curr"><em
-                                            class="layui-laypage-em"></em><em>1</em></span><a href="javascript:;"
-                                                                                              data-page="2">2</a><a
-                                        href="javascript:;" data-page="3">3</a><span
-                                        class="layui-laypage-spr">…</span><a href="javascript:;"
-                                                                             class="layui-laypage-last" title="尾页"
-                                                                             data-page="10">10</a><a href="javascript:;"
-                                                                                                     class="layui-laypage-next"
-                                                                                                     data-page="2"><i
-                                            class="layui-icon"></i></a><span class="layui-laypage-skip">到第<input
-                                            type="text" min="1" value="1" class="layui-input">页<button type="button"
-                                                                                                       class="layui-laypage-btn">确定</button></span><span
-                                        class="layui-laypage-count">共 100 条</span><span
-                                        class="layui-laypage-limits"><select lay-ignore=""><option value="10"
-                                                                                                   selected="">10 条/页</option><option
-                                                value="20">20 条/页</option><option value="30">30 条/页</option><option
-                                                value="40">40 条/页</option><option value="50">50 条/页</option><option
-                                                value="60">60 条/页</option><option value="70">70 条/页</option><option
-                                                value="80">80 条/页</option><option
-                                                value="90">90 条/页</option></select></span></div>
-                        </div>
-                    </div>
-                </div>
+<div class="layui-row layui-col-space15 data-wrap">
+    <div class="layui-col-sm6 layui-col-md8">
+        <div class="layui-card">
+            <div class="layui-card-header">本周活跃用户</div>
+            <div class="layui-card-body">
+                <table class="layui-table layuiadmin-page-table" lay-skin="line">
+                    <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>最后登录时间</th>
+                        <th>状态</th>
+                        <th>帖子数量</th>
+                        <th>回帖数量</th>
+                        <th>获得赞</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><span class="first">胡歌</span></td>
+                        <td><i class="layui-icon layui-icon-log"> 11:20</i></td>
+                        <td><span>在线</span></td>
+                        <td><span>12</span></td>
+                        <td><span>99</span></td>
+                        <td>22 <i class="layui-icon layui-icon-praise"></i></td>
+                    </tr>
+                    <tr>
+                        <td><span class="first">胡歌</span></td>
+                        <td><i class="layui-icon layui-icon-log"> 11:20</i></td>
+                        <td><span>在线</span></td>
+                        <td><span>12</span></td>
+                        <td><span>99</span></td>
+                        <td>22 <i class="layui-icon layui-icon-praise"></i></td>
+                    </tr>
+                    <tr>
+                        <td><span class="first">胡歌</span></td>
+                        <td><i class="layui-icon layui-icon-log"> 11:20</i></td>
+                        <td><span>在线</span></td>
+                        <td><span>12</span></td>
+                        <td><span>99</span></td>
+                        <td>22 <i class="layui-icon layui-icon-praise"></i></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="layui-tab-item" style="">
-                <table id="LAY-index-topCard"></table>
-                <div class="layui-form layui-border-box layui-table-view" lay-filter="LAY-table-2"
-                     lay-id="LAY-index-topCard" style=" ">
-                    <div class="layui-table-box">
-                        <div class="layui-table-header">
-                            <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
-                                <thead>
-                                <tr>
-                                    <th data-field="0" data-key="2-0-0" data-unresize="true"
-                                        class=" layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">
-                                            <span></span></div>
-                                    </th>
-                                    <th data-field="title" data-key="2-0-1" data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><span>标题</span></div>
-                                    </th>
-                                    <th data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2"><span>发帖者</span></div>
-                                    </th>
-                                    <th data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3"><span>类别</span></div>
-                                    </th>
-                                    <th data-field="crt" data-key="2-0-4" class=" layui-unselect">
-                                        <div class="layui-table-cell laytable-cell-2-0-4"><span>点击率</span><span
-                                                    class="layui-table-sort layui-inline"><i
-                                                        class="layui-edge layui-table-sort-asc" title="升序"></i><i
-                                                        class="layui-edge layui-table-sort-desc" title="降序"></i></span>
-                                        </div>
-                                    </th>
-                                </tr>
-                                </thead>
-                            </table>
+        </div>
+        <div class="layui-card">
+            <div class="layui-card-header">最新动态</div>
+            <div class="layui-card-body">
+                <dl class="layuiadmin-card-status">
+                    <dd>
+                        <div class="layui-status-img"><a href="javascript:;"><img src="https://www.layui.com/admin/std/dist/layuiadmin/style/res/logo.png"></a></div>
+                        <div>
+                            <p>张三 在 <a lay-href="http://fly.layui.com/vipclub/list/layuiadmin/">杂谈</a> 回复了</p>
+                            <span>几秒前</span>
                         </div>
-                        <div class="layui-table-body layui-table-main">
-                            <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
-                                <tbody>
-                                <tr data-index="0" class="">
-                                    <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">1</div>
-                                    </td>
-                                    <td data-field="title" data-key="2-0-1" data-content="社区开始接受 “赞助商广告” 投放"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><a
-                                                    href="http://fly.layui.com/jie/15697/" target="_blank"
-                                                    class="layui-table-link">社区开始接受 “赞助商广告” 投放</a></div>
-                                    </td>
-                                    <td data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2">贤心</div>
-                                    </td>
-                                    <td data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3">公告</div>
-                                    </td>
-                                    <td data-field="crt" data-key="2-0-4" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-4">61632</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="1" class="">
-                                    <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">2</div>
-                                    </td>
-                                    <td data-field="title" data-key="2-0-1" data-content="layui 一周年" data-minwidth="300"
-                                        class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><a
-                                                    href="http://fly.layui.com/jie/16622/" target="_blank"
-                                                    class="layui-table-link">layui 一周年</a></div>
-                                    </td>
-                                    <td data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2">猫吃</div>
-                                    </td>
-                                    <td data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3">讨论</div>
-                                    </td>
-                                    <td data-field="crt" data-key="2-0-4" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-4">61632</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="2" class="">
-                                    <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">3</div>
-                                    </td>
-                                    <td data-field="title" data-key="2-0-1" data-content="四个月的前端" data-minwidth="300"
-                                        class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><a
-                                                    href="http://fly.layui.com/jie/16651/" target="_blank"
-                                                    class="layui-table-link">四个月的前端</a></div>
-                                    </td>
-                                    <td data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2">fd</div>
-                                    </td>
-                                    <td data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3">分享</div>
-                                    </td>
-                                    <td data-field="crt" data-key="2-0-4" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-4">61632</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="3" class="">
-                                    <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">4</div>
-                                    </td>
-                                    <td data-field="title" data-key="2-0-1" data-content="如何评价LayUI和他的作者闲心"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><a
-                                                    href="http://fly.layui.com/jie/9352/" target="_blank"
-                                                    class="layui-table-link">如何评价LayUI和他的作者闲心</a></div>
-                                    </td>
-                                    <td data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2">纸飞机</div>
-                                    </td>
-                                    <td data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3">提问</div>
-                                    </td>
-                                    <td data-field="crt" data-key="2-0-4" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-4">61632</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="4" class="">
-                                    <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">5</div>
-                                    </td>
-                                    <td data-field="title" data-key="2-0-1" data-content="如何评价LayUI和他的作者闲心"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><a
-                                                    href="http://fly.layui.com/jie/9352/" target="_blank"
-                                                    class="layui-table-link">如何评价LayUI和他的作者闲心</a></div>
-                                    </td>
-                                    <td data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2">纸飞机</div>
-                                    </td>
-                                    <td data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3">提问</div>
-                                    </td>
-                                    <td data-field="crt" data-key="2-0-4" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-4">61632</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="5" class="">
-                                    <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">6</div>
-                                    </td>
-                                    <td data-field="title" data-key="2-0-1" data-content="如何评价LayUI和他的作者闲心"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><a
-                                                    href="http://fly.layui.com/jie/9352/" target="_blank"
-                                                    class="layui-table-link">如何评价LayUI和他的作者闲心</a></div>
-                                    </td>
-                                    <td data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2">纸飞机</div>
-                                    </td>
-                                    <td data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3">提问</div>
-                                    </td>
-                                    <td data-field="crt" data-key="2-0-4" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-4">61632</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="6">
-                                    <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">7</div>
-                                    </td>
-                                    <td data-field="title" data-key="2-0-1" data-content="如何评价LayUI和他的作者闲心"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><a
-                                                    href="http://fly.layui.com/jie/9352/" target="_blank"
-                                                    class="layui-table-link">如何评价LayUI和他的作者闲心</a></div>
-                                    </td>
-                                    <td data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2">纸飞机</div>
-                                    </td>
-                                    <td data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3">提问</div>
-                                    </td>
-                                    <td data-field="crt" data-key="2-0-4" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-4">61632</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="7">
-                                    <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">8</div>
-                                    </td>
-                                    <td data-field="title" data-key="2-0-1" data-content="如何评价LayUI和他的作者闲心"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><a
-                                                    href="http://fly.layui.com/jie/9352/" target="_blank"
-                                                    class="layui-table-link">如何评价LayUI和他的作者闲心</a></div>
-                                    </td>
-                                    <td data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2">纸飞机</div>
-                                    </td>
-                                    <td data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3">提问</div>
-                                    </td>
-                                    <td data-field="crt" data-key="2-0-4" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-4">61632</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="8">
-                                    <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">9</div>
-                                    </td>
-                                    <td data-field="title" data-key="2-0-1" data-content="如何评价LayUI和他的作者闲心"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><a
-                                                    href="http://fly.layui.com/jie/9352/" target="_blank"
-                                                    class="layui-table-link">如何评价LayUI和他的作者闲心</a></div>
-                                    </td>
-                                    <td data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2">纸飞机</div>
-                                    </td>
-                                    <td data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3">提问</div>
-                                    </td>
-                                    <td data-field="crt" data-key="2-0-4" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-4">61632</div>
-                                    </td>
-                                </tr>
-                                <tr data-index="9">
-                                    <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                        <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">10</div>
-                                    </td>
-                                    <td data-field="title" data-key="2-0-1" data-content="如何评价LayUI和他的作者闲心"
-                                        data-minwidth="300" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-1"><a
-                                                    href="http://fly.layui.com/jie/9352/" target="_blank"
-                                                    class="layui-table-link">如何评价LayUI和他的作者闲心</a></div>
-                                    </td>
-                                    <td data-field="username" data-key="2-0-2" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-2">纸飞机</div>
-                                    </td>
-                                    <td data-field="channel" data-key="2-0-3" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-3">提问</div>
-                                    </td>
-                                    <td data-field="crt" data-key="2-0-4" class="">
-                                        <div class="layui-table-cell laytable-cell-2-0-4">61632</div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                    </dd>
+                    <dd>
+                        <div class="layui-status-img"><a href="javascript:;"><img src="https://www.layui.com/admin/std/dist/layuiadmin/style/res/logo.png"></a></div>
+                        <div>
+                            <p>张三 在 <a lay-href="http://fly.layui.com/vipclub/list/layuiadmin/">杂谈</a> 回复了</p>
+                            <span>几秒前</span>
                         </div>
-                        <div class="layui-table-fixed layui-table-fixed-l">
-                            <div class="layui-table-header">
-                                <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
-                                    <thead>
-                                    <tr>
-                                        <th data-field="0" data-key="2-0-0" data-unresize="true"
-                                            class=" layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">
-                                                <span></span></div>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div class="layui-table-body" style="height: 0px;">
-                                <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-skin="line">
-                                    <tbody>
-                                    <tr data-index="0" class="">
-                                        <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">1
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="1" class="">
-                                        <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">2
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="2" class="">
-                                        <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">3
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="3" class="">
-                                        <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">4
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="4" class="">
-                                        <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">5
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="5" class="">
-                                        <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">6
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="6">
-                                        <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">7
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="7">
-                                        <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">8
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="8">
-                                        <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">9
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr data-index="9">
-                                        <td data-field="0" data-key="2-0-0" class="layui-table-col-special">
-                                            <div class="layui-table-cell laytable-cell-2-0-0 laytable-cell-numbers">10
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    </dd>
+                    <dd>
+                        <div class="layui-status-img"><a href="javascript:;"><img src="https://www.layui.com/admin/std/dist/layuiadmin/style/res/logo.png"></a></div>
+                        <div>
+                            <p>张三 在 <a lay-href="http://fly.layui.com/vipclub/list/layuiadmin/">杂谈</a> 回复了</p>
+                            <span>几秒前</span>
                         </div>
-                    </div>
-                    <div class="layui-table-page">
-                        <div id="layui-table-page2">
-                            <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-2"><a
-                                        href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0"><i
-                                            class="layui-icon"></i></a><span class="layui-laypage-curr"><em
-                                            class="layui-laypage-em"></em><em>1</em></span><a href="javascript:;"
-                                                                                              data-page="2">2</a><a
-                                        href="javascript:;" data-page="3">3</a><span
-                                        class="layui-laypage-spr">…</span><a href="javascript:;"
-                                                                             class="layui-laypage-last" title="尾页"
-                                                                             data-page="10">10</a><a href="javascript:;"
-                                                                                                     class="layui-laypage-next"
-                                                                                                     data-page="2"><i
-                                            class="layui-icon"></i></a><span class="layui-laypage-skip">到第<input
-                                            type="text" min="1" value="1" class="layui-input">页<button type="button"
-                                                                                                       class="layui-laypage-btn">确定</button></span><span
-                                        class="layui-laypage-count">共 100 条</span><span
-                                        class="layui-laypage-limits"><select lay-ignore=""><option value="10"
-                                                                                                   selected="">10 条/页</option><option
-                                                value="20">20 条/页</option><option value="30">30 条/页</option><option
-                                                value="40">40 条/页</option><option value="50">50 条/页</option><option
-                                                value="60">60 条/页</option><option value="70">70 条/页</option><option
-                                                value="80">80 条/页</option><option
-                                                value="90">90 条/页</option></select></span></div>
+                    </dd>
+                    <dd>
+                        <div class="layui-status-img"><a href="javascript:;"><img src="https://www.layui.com/admin/std/dist/layuiadmin/style/res/logo.png"></a></div>
+                        <div>
+                            <p>张三 在 <a lay-href="http://fly.layui.com/vipclub/list/layuiadmin/">杂谈</a> 回复了</p>
+                            <span>几秒前</span>
                         </div>
-                    </div>
-                </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md4">
+        <div class="layui-card">
+            <div class="layui-card-header">版本信息</div>
+            <div class="layui-card-body layui-text">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="100">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td>当前版本</td>
+                        <td>V0.01</td>
+                    </tr>
+                    <tr>
+                        <td>基于框架</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>主要特色</td>
+                        <td>清爽 / 极简</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="layui-card">
+            <div class="layui-card-header">系统信息</div>
+            <div class="layui-card-body layui-text">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="100">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td>使用内存</td>
+                        <td>50%</td>
+                    </tr>
+                    <tr>
+                        <td>剩余硬盘</td>
+                        <td>99%</td>
+                    </tr>
+                    <tr>
+                        <td>在线人数</td>
+                        <td>999</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

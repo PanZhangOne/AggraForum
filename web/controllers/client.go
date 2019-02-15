@@ -619,6 +619,59 @@ func (c *ClientController) GetMessage() mvc.Result {
 	}
 }
 
+func (c *ClientController) GetMessageRead(id uint) {
+	var (
+		userID  = users.GetCurrentUserID(c.Sessions)
+		results = make(map[string]interface{})
+	)
+
+	results["success"] = false
+	results["message"] = ""
+
+	if userID <= 0 {
+		results["message"] = "请先登录"
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+
+	err := c.MessageService.ReadMessage(userID, id)
+	if err != nil {
+		results["message"] = err.Error()
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+	results["success"] = true
+	results["message"] = "success"
+	_, _ = c.Ctx.JSON(results)
+	return
+}
+
+func (c *ClientController) GetMessageDelete(id uint) {
+	var (
+		userID  = users.GetCurrentUserID(c.Sessions)
+		results = make(map[string]interface{})
+	)
+
+	results["success"] = false
+	results["message"] = ""
+
+	if userID <= 0 {
+		results["message"] = "请先登录"
+		_, _ = c.Ctx.JSON(results)
+		return
+	}
+
+	err := c.MessageService.DeleteMessage(userID, id)
+	if err != nil {
+		results["message"] = err.Error()
+		return
+	}
+	results["success"] = true
+	results["message"] = "删除成功"
+	_, _ = c.Ctx.JSON(results)
+	return
+}
+
 func (c *ClientController) GetAbout() mvc.Result {
 	hots := c.TopicService.FindHots(10)
 	hotLabels := c.LabelService.FindHotLabels()

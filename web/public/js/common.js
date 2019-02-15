@@ -44,6 +44,7 @@ const COMMON = (function () {
                 return s.toUpperCase();
             });
         }
+
         function stringify(data) {
             let res = '';
             for (const i in data) {
@@ -57,16 +58,18 @@ const COMMON = (function () {
 
     const init = function () {
         const forms = document.getElementsByClassName('needs-validation');
+        const collapseHooks = document.getElementsByClassName('collapse-hook');
         Array.prototype.filter.call(forms, function (form) {
             form.classList.add('was-validated');
         });
 
+        // 设备信息
         window.deviceInfo = UTIL.firstUpperCase(detector.os.name) + " " + detector.os.version + "/" +
             UTIL.firstUpperCase(detector.browser.name) + " " +
             detector.browser.version;
 
         axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
+        // collapse
         window.AJAX = AJAX;
         window.UTIL = UTIL;
     };

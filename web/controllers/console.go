@@ -16,6 +16,18 @@ type ConsoleController struct {
 	Sessions     *sessions.Session
 }
 
+// 如果直接访问/console 跳转到/console/home
+func (c *ConsoleController) Get() {
+	userID := users.GetCurrentUserID(c.Sessions)
+
+	if userID <= 0 {
+		c.Ctx.Redirect("/login")
+		return
+	}
+	c.Ctx.Redirect("/console/home")
+}
+
+// Get /console/home
 func (c *ConsoleController) GetHome() mvc.Result {
 	user := users.GetCurrentUser(c.Sessions)
 
@@ -42,6 +54,7 @@ func (c *ConsoleController) GetUsersList() mvc.Result {
 	)
 
 	results["User"] = user
+	results["Title"] = "用户列表"
 	return mvc.View{
 		Layout: "shared/layout_console.html",
 		Name:   "console/users/list.html",
