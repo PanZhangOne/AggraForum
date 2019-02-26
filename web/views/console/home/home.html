@@ -1,203 +1,57 @@
-<!-- 数据概览 START -->
-<div class="layui-row layui-col-space15 data-wrap">
-    <div class="layui-col-sm6 layui-col-md3">
-        <div class="layui-card">
-            <div class="layui-card-header">
-                访问量
-                <span class="layui-badge layui-bg-blue layuiadmin-badge">周</span>
-            </div>
-            <div class="layui-card-body layuiadmin-card-list">
-                <p class="layuiadmin-big-font">9,999,666</p>
-                <p>
-                    总计访问量
-                    <span class="layuiadmin-span-color">88万 <i
-                                class="layui-inline layui-icon layui-icon-flag"></i></span>
-                </p>
-            </div>
-        </div>
+<div class="main_bd">
+    <div class="main_hd">
+        <h2>数据概览</h2>
     </div>
-    <div class="layui-col-sm6 layui-col-md3">
-        <div class="layui-card">
-            <div class="layui-card-header">
-                发帖量
-                <span class="layui-badge layui-bg-blue layuiadmin-badge">周</span>
+    <div class="panel-group">
+        <div class="panel">
+            <div class="panel_hd">
+                <h3>活跃数据</h3>
             </div>
-            <div class="layui-card-body layuiadmin-card-list">
-                <p class="layuiadmin-big-font">9,999,666</p>
-                <p>
-                    总计发帖量
-                    <span class="layuiadmin-span-color">88万 <i
-                                class="layui-inline layui-icon layui-icon-flag"></i></span>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="layui-col-sm6 layui-col-md3">
-        <div class="layui-card">
-            <div class="layui-card-header">
-                回帖量
-                <span class="layui-badge layui-bg-blue layuiadmin-badge">周</span>
-            </div>
-            <div class="layui-card-body layuiadmin-card-list">
-                <p class="layuiadmin-big-font">9,999,666</p>
-                <p>
-                    总计回帖量
-                    <span class="layuiadmin-span-color">88万 <i
-                                class="layui-inline layui-icon layui-icon-flag"></i></span>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="layui-col-sm6 layui-col-md3">
-        <div class="layui-card">
-            <div class="layui-card-header">
-                新会员
-                <span class="layui-badge layui-bg-blue layuiadmin-badge">周</span>
-            </div>
-            <div class="layui-card-body layuiadmin-card-list">
-                <p class="layuiadmin-big-font">9,999,666</p>
-                <p>
-                    总计新会员
-                    <span class="layuiadmin-span-color">88万 <i
-                                class="layui-inline layui-icon layui-icon-flag"></i></span>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 数据概览 END -->
-
-<div class="layui-row layui-col-space15 data-wrap">
-    <div class="layui-col-sm6 layui-col-md8">
-        <div class="layui-card">
-            <div class="layui-card-header">本周活跃用户</div>
-            <div class="layui-card-body">
-                <table class="layui-table layuiadmin-page-table" lay-skin="line">
-                    <thead>
-                    <tr>
-                        <th>用户名</th>
-                        <th>最后登录时间</th>
-                        <th>状态</th>
-                        <th>帖子数量</th>
-                        <th>回帖数量</th>
-                        <th>获得赞</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><span class="first">胡歌</span></td>
-                        <td><i class="layui-icon layui-icon-log"> 11:20</i></td>
-                        <td><span>在线</span></td>
-                        <td><span>12</span></td>
-                        <td><span>99</span></td>
-                        <td>22 <i class="layui-icon layui-icon-praise"></i></td>
-                    </tr>
-                    <tr>
-                        <td><span class="first">胡歌</span></td>
-                        <td><i class="layui-icon layui-icon-log"> 11:20</i></td>
-                        <td><span>在线</span></td>
-                        <td><span>12</span></td>
-                        <td><span>99</span></td>
-                        <td>22 <i class="layui-icon layui-icon-praise"></i></td>
-                    </tr>
-                    <tr>
-                        <td><span class="first">胡歌</span></td>
-                        <td><i class="layui-icon layui-icon-log"> 11:20</i></td>
-                        <td><span>在线</span></td>
-                        <td><span>12</span></td>
-                        <td><span>99</span></td>
-                        <td>22 <i class="layui-icon layui-icon-praise"></i></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="layui-card">
-            <div class="layui-card-header">最新动态</div>
-            <div class="layui-card-body">
-                <dl class="layuiadmin-card-status">
-                    <dd>
-                        <div class="layui-status-img"><a href="javascript:;"><img src="https://www.layui.com/admin/std/dist/layuiadmin/style/res/logo.png"></a></div>
-                        <div>
-                            <p>张三 在 <a lay-href="http://fly.layui.com/vipclub/list/layuiadmin/">杂谈</a> 回复了</p>
-                            <span>几秒前</span>
+            <div class="row">
+                <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">用户数量</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">总用户数量</h6>
+                            <em class="panel_data_overview_desc">
+                                <span>999</span>
+                            </em>
                         </div>
-                    </dd>
-                    <dd>
-                        <div class="layui-status-img"><a href="javascript:;"><img src="https://www.layui.com/admin/std/dist/layuiadmin/style/res/logo.png"></a></div>
-                        <div>
-                            <p>张三 在 <a lay-href="http://fly.layui.com/vipclub/list/layuiadmin/">杂谈</a> 回复了</p>
-                            <span>几秒前</span>
+                    </div>
+                </div>
+                <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">用户数量</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">总用户数量</h6>
+                            <em class="panel_data_overview_desc">
+                                <span>999</span>
+                            </em>
                         </div>
-                    </dd>
-                    <dd>
-                        <div class="layui-status-img"><a href="javascript:;"><img src="https://www.layui.com/admin/std/dist/layuiadmin/style/res/logo.png"></a></div>
-                        <div>
-                            <p>张三 在 <a lay-href="http://fly.layui.com/vipclub/list/layuiadmin/">杂谈</a> 回复了</p>
-                            <span>几秒前</span>
+                    </div>
+                </div>
+                <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">用户数量</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">总用户数量</h6>
+                            <em class="panel_data_overview_desc">
+                                <span>999</span>
+                            </em>
                         </div>
-                    </dd>
-                    <dd>
-                        <div class="layui-status-img"><a href="javascript:;"><img src="https://www.layui.com/admin/std/dist/layuiadmin/style/res/logo.png"></a></div>
-                        <div>
-                            <p>张三 在 <a lay-href="http://fly.layui.com/vipclub/list/layuiadmin/">杂谈</a> 回复了</p>
-                            <span>几秒前</span>
+                    </div>
+                </div>
+                <div class="col-12 col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">用户数量</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">总用户数量</h6>
+                            <em class="panel_data_overview_desc">
+                                <span>999</span>
+                            </em>
                         </div>
-                    </dd>
-                </dl>
-            </div>
-        </div>
-    </div>
-    <div class="layui-col-sm6 layui-col-md4">
-        <div class="layui-card">
-            <div class="layui-card-header">版本信息</div>
-            <div class="layui-card-body layui-text">
-                <table class="layui-table">
-                    <colgroup>
-                        <col width="100">
-                        <col>
-                    </colgroup>
-                    <tbody>
-                    <tr>
-                        <td>当前版本</td>
-                        <td>V0.01</td>
-                    </tr>
-                    <tr>
-                        <td>基于框架</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>主要特色</td>
-                        <td>清爽 / 极简</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="layui-card">
-            <div class="layui-card-header">系统信息</div>
-            <div class="layui-card-body layui-text">
-                <table class="layui-table">
-                    <colgroup>
-                        <col width="100">
-                        <col>
-                    </colgroup>
-                    <tbody>
-                    <tr>
-                        <td>使用内存</td>
-                        <td>50%</td>
-                    </tr>
-                    <tr>
-                        <td>剩余硬盘</td>
-                        <td>99%</td>
-                    </tr>
-                    <tr>
-                        <td>在线人数</td>
-                        <td>999</td>
-                    </tr>
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

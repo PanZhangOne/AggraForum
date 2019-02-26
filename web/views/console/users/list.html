@@ -53,6 +53,23 @@
                 <button class="layui-btn layuiadmin-btn-useradmin" data-type="add">添加</button>
             </div>
         </div>
+
+        <table class="layui-table" lay-data="{height:315, url:'/demo/table/user/', page:true, id:'test'}" lay-filter="test">
+            <thead>
+            <tr>
+                <th lay-data="{field:'id', width:80, sort: true}">ID</th>
+                <th lay-data="{field:'username', width:80}">用户名</th>
+                <th lay-data="{field:'sex', width:80, sort: true}">性别</th>
+                <th lay-data="{field:'city'}">城市</th>
+                <th lay-data="{field:'sign'}">签名</th>
+                <th lay-data="{field:'experience', sort: true}">积分</th>
+                <th lay-data="{field:'score', sort: true}">发帖</th>
+                <th lay-data="{field:'classify'}">回帖</th>
+                <th lay-data="{field:'wealth', sort: true}">注册时间</th>
+                <th lay-data="{field:'wealth', sort: true}">最后登录</th>
+            </tr>
+            </thead>
+        </table>
     </div>
 
 </div>

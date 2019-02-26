@@ -3,6 +3,7 @@ package repository
 import (
 	"forum/entitys"
 	"github.com/jinzhu/gorm"
+	"time"
 )
 
 type ReplyRepo struct {
@@ -57,6 +58,14 @@ func (r *ReplyRepo) FindByTopicID(topicID uint) ([]entitys.Reply, error) {
 		}
 	}
 	return replies, err
+}
+
+// GetRepliesCountByTime 通过时间查找回帖时间
+func (r *ReplyRepo) GetRepliesCountByTime(startTime, endTime time.Time) int {
+	var repliesCount = 0
+	r.db.Model(&entitys.Reply{}).Where("created_at >= ? and created_at <= ?", startTime.Unix(), endTime.Unix()).
+		Count(&repliesCount)
+	return repliesCount
 }
 
 func (r *ReplyRepo) Update(reply *entitys.Reply) error {

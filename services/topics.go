@@ -84,9 +84,13 @@ func (s *topicsService) FindHots(limit int) []entitys.Topic {
 	return t
 }
 
+// GetTopicCount 获取贴数量
 func (s *topicsService) GetTopicCount(userID uint) map[string]int {
 	return s.repo.GetTopicsCount(userID)
 }
+
+//
+//func (s *topicsService) Get
 
 // AddTopicOnceViewCount
 // Increase the number of topic readings

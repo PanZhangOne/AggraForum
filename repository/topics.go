@@ -4,6 +4,7 @@ import (
 	"forum/entitys"
 	"github.com/jinzhu/gorm"
 	"github.com/kataras/iris/core/errors"
+	"time"
 )
 
 type TopicsRepo struct {
@@ -113,6 +114,14 @@ func (r *TopicsRepo) GetTopicsCount(userID uint) map[string]int {
 	result["TopicGoods"] = <-topicGoodsCh
 
 	return result
+}
+
+// GetTopicCountByTime 通过时间查找主题数量
+func (r *TopicsRepo) GetTopicCountByTime(startTime, endTime time.Time) int {
+	var topicCount = 0
+	r.db.Model(&entitys.Topic{}).Where("created_at <= ? and created_at >= ?", startTime.Unix(), endTime.Unix()).
+		Count(&topicCount)
+	return topicCount
 }
 
 func (r *TopicsRepo) Update(topic *entitys.Topic) error {
